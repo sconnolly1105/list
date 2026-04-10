@@ -1,0 +1,46 @@
+<html>
+
+<head>
+
+  <style>
+    .styleClass {
+      display: table-cell;
+      border: 1px solid #000;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+
+</head>
+
+<body>
+  <pre>
+&lt;div class="styleClass" type="button" onclick="alert('DIV clicked')">DIV Element
+    &lt;span class="styleClass" type="button" onclick="alert('SPAN clicked')">SPAN Element
+      &lt;input type="button" onclick="buttonClicked(event)" value="Click Me!">
+    &lt;/span>
+  &lt;/div>
+  
+  
+  function buttonClicked(event) {
+    alert('Button clicked');
+    // event.stopPropagation();   - Use this to stop bubbling    
+  }
+  
+</pre>
+
+  <div class="styleClass" type="button" onclick="alert('DIV clicked')">DIV Element
+    <span class="styleClass" type="button" onclick="alert('SPAN clicked')">SPAN Element
+      <input type="button" onclick="buttonClicked(event)" value="Click Me!">
+    </span>
+  </div>
+
+  <script>
+    function buttonClicked(event) {
+      alert('Button clicked');
+      // event.stopPropagation();
+    }
+  </script>
+
+</body>
+<html>

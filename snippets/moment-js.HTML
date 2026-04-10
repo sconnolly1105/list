@@ -1,0 +1,104 @@
+<!doctype html> 
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="S, Connolly" />
+<meta name="description" content="" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+
+</head>
+
+<body>
+
+<script>
+
+// Format dates and times
+//================================================
+console.group ('Format dates and times');
+let now = moment().format('MMMM Do YYYY, h:mm:ss a'); // August 24th 2022, 9:23:39 pm
+console.log(now);
+now = moment().format('dddd');                    // Wednesday
+console.log(now);
+now = moment().format("MMM Do YY");               // Aug 24th 22
+console.log(now);
+now = moment().format('YYYY [escaped] YYYY');     // 2022 escaped 2022
+console.log(now);
+now = moment().format();
+console.log(now);
+console.groupEnd ();
+
+// Relative times
+//===============================================================
+console.group ('Relative times');
+now = moment("20111031", "YYYYMMDD").fromNow(); // 11 years ago
+console.log(now);
+now = moment("20120620", "YYYYMMDD").fromNow(); // 10 years ago
+console.log(now);
+now = moment().startOf('day').fromNow();        // 21 hours ago
+console.log(now);
+now = moment().endOf('day').fromNow();          // in 3 hours
+console.log(now);
+now = moment().startOf('hour').fromNow();      
+console.log(now);
+console.groupEnd ();
+
+//Calendar time
+//================================================================
+console.group ('Calendar time');
+now = moment().subtract(10, 'days').calendar(); // 08/14/2022
+console.log(now);
+now = moment().subtract(6, 'days').calendar();  // Last Thursday at 9:28 PM
+console.log(now);
+now = moment().subtract(3, 'days').calendar();  // Last Sunday at 9:28 PM
+console.log(now);
+now = moment().subtract(1, 'days').calendar();  // Yesterday at 9:28 PM
+console.log(now);
+now = moment().calendar();                      // Today at 9:28 PM
+console.log(now);
+now = moment().add(1, 'days').calendar();       // Tomorrow at 9:28 PM
+console.log(now);
+now = moment().add(3, 'days').calendar();       // Saturday at 9:28 PM
+console.log(now);
+now = moment().add(10, 'days').calendar();
+console.log(now);
+console.groupEnd ();
+
+//Multiple locale support
+//================================================================
+console.group ('Multiple locale support');
+now = moment.locale();         // en
+console.log(now);
+now = moment().format('LT');   // 9:31 PM
+console.log(now);
+now = moment().format('LTS');  // 9:31:52 PM
+console.log(now);
+now = moment().format('L');    // 08/24/2022
+console.log(now);
+now = moment().format('l');    // 8/24/2022
+console.log(now);
+now = moment().format('LL');   // August 24, 2022
+console.log(now);
+now = moment().format('ll');   // Aug 24, 2022
+console.log(now);
+now = moment().format('LLL');  // August 24, 2022 9:31 PM
+console.log(now);
+now = moment().format('lll');  // Aug 24, 2022 9:31 PM
+console.log(now);
+now = moment().format('LLLL'); // Wednesday, August 24, 2022 9:31 PM
+console.log(now);
+now = moment().format('llll');
+console.log(now);
+console.groupEnd ();
+
+</script>
+
+</body>
+
+</html> 

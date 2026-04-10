@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to Intersection Observer - Kevin Powell</title>
+
+    <style>
+        .container {
+            width: 30%;
+            margin: 20px auto;
+        }
+        .images img {
+            display: block;
+            height: 500px;
+            width: 500px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+
+        <h1>Intersection Observer - Lazy load images</h1>
+
+        <div style='font-size: 60px;'>
+        The page is broken into different sections, each section been bounded by a thick dashed border. <br>
+        As you scroll down The screen and 50% of the section is in the viewport then the colour of the section will change<br>
+        As you scroll further down and less than 50% is in the viewport then the section colours will change back.<br>
+        Scrolling back up until 50% is again in the viewport causes the colours to be applied once again.
+        </div>
+
+        <div class="images">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+            <img src="https://via.placeholder.com/500" alt="">
+        </div>
+    </div>
+    
+</body>
+
+<script>
+    const options = {
+        root: null,     // null = viewport
+        threshold: [ .5 ],      // this is an array so I could have [ .1, .5 ] which will fire the observer when 10% and 50% of the image comes into the placeholder view
+        rootMargin: "0px"
+    };
+
+    const images = document.querySelectorAll ('img');
+
+    let imageNumber = 0;
+
+    const observer = new IntersectionObserver (function(entries, observer) {
+        entries.forEach (entry => {
+            if (!entry.isIntersecting) {
+                return;         // it's not in the viewport so get out
+            }
+            if (entry.isIntersecting && entry.intersectionRatio >= .5) {
+                console.log ('entry.target.src:', entry.target.src);
+                // entry.target.src = 'https://source.unsplash.com/random?sig=123?city,night';
+                //Generate a random number between 1 and 1,000
+                //=============================================
+                imageNumber = Math.floor(Math.random() * (1000 - 1 + 1) + 1);
+                entry.target.src = `https://source.unsplash.com/collection/1051/${imageNumber}`;
+                entry.target.alt = "Random unsplash image"
+                console.log ('entry.target.src:', entry.target.src);
+                observer.unobserve (entry.target);
+            }
+        })
+    }, options);
+
+    images.forEach (image => {
+        observer.observe (image);
+    })
+</script>
+
+</html>

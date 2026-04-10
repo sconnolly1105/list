@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Compoments 1</title>
+</head>
+<body>
+    <h1>Web Components& Custom Elements</h1>
+    <h3>YouTube video for this is at <a target="_blank" href="https://www.youtube.com/watch?v=PCWaFLy3VUo">https://www.youtube.com/watch?v=PCWaFLy3VUo</a></h3>
+
+    <div class="user-cards">
+      <user-card name="John Doe" avatar="https://randomuser.me/api/portraits/men/1.jpg">
+        <div slot="email">johndoe@gmail.com</div>
+        <div slot="phone">555-555-5555</div>
+        <div slot="occupation">Unknown</div>
+      </user-card>
+      <user-card name="Jane Doe" avatar="https://randomuser.me/api/portraits/women/6.jpg">
+        <div slot="email">janedoe@gmail.com</div>
+        <div slot="phone">333-333-3333</div>
+        <div slot="occupation">Web designer</div>
+      </user-card>
+      <user-card name="Alvin Stardust" avatar="https://randomuser.me/api/portraits/men/7.jpg">
+        <div slot="email">alvin@gmail.com</div>
+        <div slot="phone">087-555-5555</div>
+        <div slot="occupation">Singer</div>
+      </user-card>
+      <user-card name="Micky Most" avatar="https://randomuser.me/api/portraits/men/6.jpg">
+        <div slot="email">mickeymost@gmail.com</div>
+        <div slot="phone">086-555-5555</div>
+        <div slot="occupation">Record Producer</div>
+      </user-card>
+      <user-card name="Chuck Wepner" avatar="https://randomuser.me/api/portraits/men/26.jpg">
+        <div slot="email">bayonnebleerer@gmail.com</div>
+        <div slot="phone">086-329 329</div>
+        <div slot="occupation">Boxer</div>
+      </user-card>
+      <user-card name="Billy Bremner" avatar="https://randomuser.me/api/portraits/men/46.jpg">
+        <div slot="email">redhead@gmail.com</div>
+        <div slot="phone">086-328 328</div>
+        <div slot="occupation">Footballer</div>
+      </user-card>
+    </div>
+
+ <script>
+const template = document.createElement('template');
+template.innerHTML = `
+  <style>
+  .user-card {
+		font-family: 'Arial', sans-serif;
+		background: #f4f4f4;
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+    padding: 30px;
+//		border-bottom: darkorchid 5px solid;
+    box-shadow: 5px 5px 6px 4px #B1AAAA;
+    border-radius: 5px;
+    column-gap: 1em;
+    max-height: 255px;
+	}
+
+	.user-card img {
+		width: 100%;
+	}
+
+	.user-card button {
+		cursor: pointer;
+		background: darkorchid;
+		color: #fff;
+		border: 0;
+		border-radius: 5px;
+		padding: 5px 10px;
+	}
+  </style>
+  <div class="user-card">
+    <img />
+    <div>
+      <h3></h3>
+      <div class="info">
+        <p><slot name="email" /></p>
+        <p><slot name="occupation" /></p>
+        <p><slot name="phone" /></p>
+      </div>
+      <button id="toggle-info">Hide Info</button>
+    </div>
+  </div>
+`;
+
+class UserCard extends HTMLElement {
+  constructor() {
+    super();
+
+    this.showInfo = true;
+
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot.querySelector('h3').innerText = this.getAttribute('name');
+    this.shadowRoot.querySelector('img').src = this.getAttribute('avatar');
+  }
+
+  toggleInfo() {
+    this.showInfo = !this.showInfo;
+
+    const info = this.shadowRoot.querySelector('.info');
+    const toggleBtn = this.shadowRoot.querySelector('#toggle-info');
+
+    if(this.showInfo) {
+//      info.style.visibility = 'visible';
+      info.style.display = 'block';
+      toggleBtn.innerText = 'Hide Info';
+    } else {
+//      info.style.visibility = 'hidden';
+      info.style.display = 'none';
+      toggleBtn.innerText = 'Show Info';
+    }
+  }
+
+  connectedCallback() {
+    this.shadowRoot.querySelector('#toggle-info').addEventListener('click', () => this.toggleInfo());
+  }
+
+  disconnectedCallback() {
+    this.shadowRoot.querySelector('#toggle-info').removeEventListener();
+  }
+}
+
+window.customElements.define('user-card', UserCard);
+
+ </script>
+
+<style>
+  .user-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+    margin: 40px 30px;
+  }
+
+  /* new css to make the cards wrap on larger screens */
+  .user-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 30px;
+  justify-items: center;
+}
+
+.user-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 2em;
+  padding: 1em;
+}
+
+
+/* new css to make the cards wrap on larger screens */
+
+</style>
+
+</body>
+</html>

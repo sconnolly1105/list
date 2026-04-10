@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <style>
+    table {
+      width: 25%;
+      margin: 7% auto 0;
+      border: 1px solid;
+      padding: 18px 10px;
+      border-collapse: collapse;
+    }
+    td, th {
+      text-align: right;
+      padding: 6px 10px;
+    }
+    .qty {
+      border: 1px solid lightgrey;
+      text-align: right;
+      width: 60px;
+    }
+    tfoot td {
+      border-top: 2px solid #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Line Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="unit-price">123.45</td>
+        <td><input type="number" class="qty" value="0" min="0"></td>
+        <td class="line-total">0.00</td>
+      </tr>
+      <tr>
+        <td class="unit-price">543.21</td>
+        <td><input type="number" class="qty" value="0" min="0"></td>
+        <td class="line-total">0.00</td>
+      </tr>
+      <tr>
+        <td class="unit-price">1000.20</td>
+        <td><input type="number" class="qty" value="0" min="0"></td>
+        <td class="line-total">0.00</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2">Grand Total</td>
+        <td id="grand-total">0.00</td>
+      </tr>
+    </tfoot>
+  </table>
+
+</body>
+
+<script>
+  $(document).ready(function () {
+
+    function updateTotals() {
+      let grandTotal = 0;
+      $('.qty').each(function (idx) {
+        const qty       = parseFloat($(this).val())  || 0;
+        const unitPrice = parseFloat($('.unit-price').eq(idx).text());
+        const lineTotal = (qty * unitPrice).toFixed(2);
+        $('.line-total').eq(idx).text(lineTotal);
+        grandTotal += parseFloat(lineTotal);
+      });
+      $('#grand-total').text(grandTotal.toFixed(2));
+    }
+
+    $('.qty').on('input', updateTotals);
+
+  });
+</script>
+</html>

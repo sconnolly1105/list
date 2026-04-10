@@ -1,0 +1,58 @@
+<html>
+<head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+let arr = [
+  {
+    name: "Sean",
+    age: 63,
+    showName: function () {
+      console.log(`My name is: ${this.name}`);
+    }
+  }
+];
+
+let WorkerObject = function (entry) {
+  this.showName = (entry) => {
+    console.log (entry.name);
+    return this;
+  },
+  this.showAge = (entry) => {
+    console.log (entry.age);
+    return this;
+  }
+}
+
+let ShowAdd = function() {
+  this.age = 63;
+  this.showAddr = () => {
+    console.log (`this.address: ${this.address}`);
+  }
+}
+
+let worker = new WorkerObject();
+
+arr.forEach( function(entry) {
+    worker.showName(entry).showAge(entry);    // chaining
+    let showMyName = entry.showName.bind(entry);
+    showMyName();
+});
+
+let thisObj = {
+  address: "Gurraun Lower"
+}
+
+let myAdd = new ShowAdd();
+console.log (`myAdd: ${JSON.stringify(myAdd , undefined, 2)}`)
+let myAddress = myAdd.showAddr.bind(thisObj);
+myAddress();
+
+
+</script>
+</head>
+<body>
+  <h2>Bind Example - check the console</h2>
+</body>
+</html>

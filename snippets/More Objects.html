@@ -1,0 +1,72 @@
+<script>
+
+  // Another way of creating objects - not using the new keyword
+  // Create an object within a function and return the object
+  // from the function
+  //============================================================
+
+  function person(name, location) {
+
+    var obj = {
+      name: name,
+      location: location,
+      showName: function () {
+        console.log('My name is ' + this.name + ' and I live in ' + this.location);
+      }
+    }
+
+    return obj;
+
+  }
+
+  var people = [];
+
+  people.push(person("Sean Connolly", "Galway"));
+  people.push(person("David Sheerin", "Sligo"));
+  people.push(person("Kealan McDevitt", "Donegal"));
+  people.push(person("Gearoid McTiernan", "Leitrim"));
+
+  for (p of people) {
+    p.showName();
+  }
+
+</script>
+
+<body>
+
+  <h2>Check the console</h2>
+
+  <pre>
+      
+      // Another way of creating objects - not using the new keyword
+      // Create an object within a function and return the object
+      // from the function
+      //============================================================
+      
+      function person(name, location) {
+      
+        var obj = {
+          name: name,
+          location: location,
+          showName: function() {
+            console.log ('My name is ' + this.name + ' and I live in ' + this.location);
+          }
+        }
+      
+        return obj;
+      
+      }
+      
+      var people = [];
+      
+      people.push(person("Sean Connolly", "Galway"));
+      people.push(person("David Sheerin", "Sligo"));
+      people.push(person("Kealan McDevitt", "Donegal"));
+      people.push(person("Gearoid McTiernan", "Leitrim"));
+      
+      for (p of people) {
+        p.showName();
+      }
+      
+      </pre>
+</body>

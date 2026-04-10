@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>A red heading</h2>
+    <article contenteditable="true">
+        <h2>Sample heading - blue</h2>
+        <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam expedita architecto suscipit, consequuntur commodi iste repudiandae placeat autem earum ipsum molestias, accusantium libero, veniam dicta saepe. Mollitia impedit nihil cum amet officiis qui alias eaque. Aspernatur quod doloremque veritatis architecto maxime, distinctio unde ullam commodi maiores molestiae voluptates fugit labore?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni unde  porro impedit ipsam perferendis possimus incidunt facilis maxime labore dolore eaque odit, eum, cupiditate atque quidem fugiat sapiente accusamus, debitis repellendus necessitatibus. Laborum alias fugiat autem! At labore et debitis nostrum reprehenderit temporibus illum sapiente quod? Velit adipisci quidem nobis veritatis, cum necessitatibus quibusdam natus sed aliquid. Architecto nulla non vitae! Provident, ducimus quas? Nostrum quo ea veniam omnis delectus debitis, deleniti nisi tempora aspernatur ratione iusto modi facere cum cupiditate porro velit sint illum! Laboriosam doloremque quos veniam non ab? Saepe porro fugiat sed sapiente aut voluptas! Sapiente distinctio libero voluptatum quidem? Facilis nesciunt iste tenetur asperiores qui. Exercitationem ad molestias distinctio architecto, eveniet explicabo repellat sequi ipsam! Repellat optio iusto, dignissimos delectus minima culpa nemo recusandae numquam eveniet neque dolorum harum iure blanditiis voluptatum doloremque. Magnam, quas quod? Unde rem rerum placeat natus nihil, deleniti hic. Ipsam, architecto!
+        </p>
+        <word-count></word-count>
+    </article>
+ 
+    <article contenteditable="true">
+            <h2>Sample heading -  royal blue</h2>
+            <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam expedita architecto suscipit, consequuntur commodi iste repudiandae placeat autem earum ipsum molestias, accusantium libero, veniam dicta saepe. Mollitia impedit nihil cum amet officiis qui alias eaque. Aspernatur quod doloremque veritatis architecto maxime, distinctio unde ullam commodi maiores molestiae voluptates fugit labore?
+            </p>
+            <word-count></word-count>
+    </article>
+   
+</body>
+</html>
+
+<script>
+
+    class WordCount extends HTMLElement {
+        constructor() {
+            super()
+
+            const parent = this.parentNode
+            let lastWords = -1
+
+            const shadow = this.attachShadow ({mode: 'open'})
+            const text = document.createElement('span');
+            const h2 = parent.querySelector('h2')
+            const countedText = parent.querySelector('p');
+            h2.style.color = 'blue'
+            shadow.appendChild(text)
+            text.style = `margin-top: 20px; 
+                          color: blue;
+                          display: block;`
+            text.style.color = 'red'
+
+            setInterval(() => {
+               // const words = this.countWords(parent.getElementsByTagName('p'));
+                const words = this.countWords(countedText);
+                if (words != lastWords) {
+                    lastWords = words
+                    const count = `Words: ${words}`
+                    text.textContent = count;
+                    if (words < 100) {
+                        text.style.color = 'red';
+                    } else {
+                        text.style.color = 'green';
+                    }
+                }
+            }, 200);
+ 
+        }
+
+        countWords (node) {
+                const text = node.innerText || node.textContent
+                var wordCount = text.match(/(\w+)/g).length;
+                return wordCount
+        }
+
+    }
+    customElements.define ("word-count", WordCount)
+</script>
+
+<style>
+    h2 {
+        color: red;
+    }
+</style>

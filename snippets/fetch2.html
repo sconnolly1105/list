@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Fetching data from an external source</h2>
+    <h2><a href="https://reqres.in/">Check out reqres test API site</a></h2>
+    <div class="container">
+        <h2>Using fetch to polulate table</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Employee Name</th>
+              <th>Employee Age</th>
+              <th>Salary</th>
+            </tr>
+          </thead>
+          <tbody id="data">
+      
+          </tbody>
+        </table>
+      </div>
+
+      <script>
+      fetch("http://dummy.restapiexample.com/api/v1/employees").then(
+        res => {
+            res.json().then(
+            data => {
+                console.log(data.data);
+                if (data.data.length > 0) {
+
+                var temp = "";
+                data.data.forEach((itemData) => {
+                    const salary = itemData.employee_salary.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'EUR',
+                    });
+                    temp += "<tr>";
+                    temp += "<td>" + itemData.id + ".</td>";
+                    temp += "<td>" + itemData.employee_name + "</td>";
+                    temp += "<td style='text-align: right;'>" + itemData.employee_age + "</td>";
+                    temp += "<td style='text-align: right;'>" + salary + "</td></tr>";
+                });
+                document.getElementById('data').innerHTML = temp;
+                }
+            }
+            )
+        }
+      )
+      </script>
+
+<style>
+    h2 {
+        text-align: center;
+    }
+    table {
+        margin: 2em auto;
+       border-collapse: collapse;
+       font-family: 'Quicksand', sans-serif;
+       overflow: hidden;
+       font-weight: bold;
+    }
+    thead th {
+        background: hsl(168, 100%, 29%);
+        color: hsl(200, 100%, 100%);
+    }
+    td, th {
+        padding: 10px 10px;
+    }
+    tr:nth-last-of-type(even) {
+        background-color: #eeeeee;
+    }
+    tr:last-of-type {
+        border-bottom: 2px solid #009578;
+    }
+</style>
+
+</body>
+</html>

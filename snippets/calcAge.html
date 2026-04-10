@@ -1,0 +1,53 @@
+<body>
+    <pre>
+        function getAge(dateString) {
+            var today = new Date();
+            var birthDate = new Date(dateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        console.log("Your age is... " + getAge('05/11/1955'));
+
+        var age = getAge('09/29/1983');
+        console.log(age);
+
+        age = getAge('14 Feb 1981');
+        console.log(age);
+
+    </pre>
+</body>
+
+<script>
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+    console.log("Your age is... " + getAge('05/11/1955'));
+
+    var age = getAge('09/29/1983');
+    console.log(age);
+
+    age = getAge('14 Feb 1981');
+    console.log(age);
+
+</script>
+
+<style>
+    body {
+        width: 40%;
+        margin: 20px auto;
+        ;
+    }
+</style>

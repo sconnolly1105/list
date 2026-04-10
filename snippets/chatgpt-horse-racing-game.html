@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horse Racing Game</title>
+  <style>
+    :root {
+      --track-color: #f5f5f5;
+      --lane-line: #d5d5d5;
+      --horse-color: #ffffff;
+      --accent: #8c5feb;
+      --text-color: #1f2933;
+      --shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #eef1f9 0%, #f8fafc 100%);
+      color: var(--text-color);
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .app-shell {
+      width: min(1100px, 100%);
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      letter-spacing: -0.5px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input[type="number"] {
+      width: 80px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #cfd5e2;
+      font-size: 16px;
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(140, 95, 235, 0.2);
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    button:not(:disabled):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(140, 95, 235, 0.25);
+    }
+
+    .track-wrapper {
+      position: relative;
+      background: var(--track-color);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #e4e8f0;
+      min-height: 400px;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .lanes {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lane {
+      flex: 1;
+      position: relative;
+      border-bottom: 1px dashed var(--lane-line);
+    }
+
+    .lane:last-child {
+      border-bottom: none;
+    }
+
+    .horse {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 48px;
+      min-width: 120px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--horse-color);
+      box-shadow: var(--shadow);
+      border: 1px solid #dfe3ef;
+      transition: transform 80ms linear;
+    }
+
+    .horse .badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .horse .name {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .finish-line {
+      position: absolute;
+      top: 0;
+      right: 60px;
+      width: 20px;
+      height: 100%;
+      background-image: linear-gradient(45deg, #000 25%, transparent 25%, transparent 50%, #000 50%, #000 75%, transparent 75%, transparent);
+      background-size: 20px 20px;
+      mix-blend-mode: multiply;
+      opacity: 0.55;
+    }
+
+    .finish-label {
+      position: absolute;
+      top: 8px;
+      right: 20px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .results {
+      margin-top: 18px;
+      padding: 14px;
+      background: #0f172a;
+      color: #fff;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .results h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .result-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .result-item strong {
+      font-size: 16px;
+    }
+
+    .status {
+      margin-left: auto;
+      font-weight: 700;
+    }
+
+    .banner {
+      margin-top: 6px;
+      color: #55607a;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <h1>🏇 QuickDraw Horse Race</h1>
+    <form class="controls" id="race-form">
+      <label for="horse-count">Number of horses:</label>
+      <input id="horse-count" name="horse-count" type="number" min="2" max="12" value="6" required />
+      <button id="start-btn" type="submit">Start race</button>
+      <button id="reset-btn" type="button" disabled>Reset</button>
+    </form>
+    <div class="banner">Choose the field size, hit start, and watch the battle for the finish line.</div>
+
+    <div class="track-wrapper">
+      <div class="lanes" id="lanes"></div>
+      <div class="finish-line"></div>
+      <div class="finish-label">Finish</div>
+    </div>
+
+    <section class="results" id="results">
+      <h2>Race results</h2>
+      <ol class="result-list" id="result-list"></ol>
+    </section>
+  </div>
+
+  <script>
+    const form = document.getElementById("race-form");
+    const lanes = document.getElementById("lanes");
+    const startBtn = document.getElementById("start-btn");
+    const resetBtn = document.getElementById("reset-btn");
+    const results = document.getElementById("results");
+    const resultList = document.getElementById("result-list");
+
+    const horses = [];
+    let raceInterval = null;
+    let finished = [];
+    let startTime = 0;
+    let finishX = 0;
+
+    function formatTime(ms) {
+      return (ms / 1000).toFixed(2) + "s";
+    }
+
+    function resetRace() {
+      clearInterval(raceInterval);
+      raceInterval = null;
+      horses.length = 0;
+      finished = [];
+      lanes.innerHTML = "";
+      resultList.innerHTML = "";
+      results.style.display = "none";
+      startBtn.disabled = false;
+      resetBtn.disabled = true;
+    }
+
+    function createHorse(id, laneIndex, laneHeight) {
+      const lane = document.createElement("div");
+      lane.className = "lane";
+
+      const horse = document.createElement("div");
+      horse.className = "horse";
+      horse.style.top = `${(laneHeight / 2) - 24}px`;
+
+      const badge = document.createElement("span");
+      badge.className = "badge";
+      badge.textContent = id;
+
+      const name = document.createElement("span");
+      name.className = "name";
+      name.textContent = `Horse ${id}`;
+
+      horse.appendChild(badge);
+      horse.appendChild(name);
+
+      lane.appendChild(horse);
+      lanes.appendChild(lane);
+
+      horses.push({
+        id,
+        el: horse,
+        lane,
+        x: 0,
+        finished: false,
+        finishTime: null,
+      });
+    }
+
+    function layOutLanes(count) {
+      lanes.innerHTML = "";
+      const wrapperHeight = Math.max(90 * count, 360);
+      lanes.style.minHeight = `${wrapperHeight}px`;
+      for (let i = 1; i <= count; i++) {
+        createHorse(i, i - 1, wrapperHeight / count);
+      }
+    }
+
+    function startRace(e) {
+      e.preventDefault();
+      const count = Number(document.getElementById("horse-count").value);
+      if (!Number.isInteger(count) || count < 2 || count > 12) {
+        alert("Please choose between 2 and 12 horses.");
+        return;
+      }
+      resetRace();
+      layOutLanes(count);
+      startBtn.disabled = true;
+      resetBtn.disabled = false;
+
+      const trackRect = lanes.getBoundingClientRect();
+      finishX = trackRect.width - 100; // leave space for finish line visual
+      startTime = performance.now();
+
+      raceInterval = setInterval(tick, 60);
+    }
+
+    function tick() {
+      const now = performance.now();
+      let activeHorses = 0;
+
+      horses.forEach((horse) => {
+        if (horse.finished) return;
+        activeHorses += 1;
+
+        const speed = Math.random() * 2.2 + 1.2; // random boost every frame
+        horse.x += speed;
+        horse.el.style.transform = `translate(${horse.x}px, -50%)`;
+
+        if (horse.x >= finishX) {
+          horse.finished = true;
+          horse.finishTime = now - startTime;
+          horse.el.style.transform = `translate(${finishX}px, -50%)`;
+          finished.push(horse);
+        }
+      });
+
+      if (activeHorses === 0) {
+        clearInterval(raceInterval);
+        raceInterval = null;
+        showResults();
+      }
+    }
+
+    function showResults() {
+      resultList.innerHTML = "";
+      finished
+        .sort((a, b) => a.finishTime - b.finishTime)
+        .forEach((horse, index) => {
+          const li = document.createElement("li");
+          li.className = "result-item";
+          const place = index + 1;
+          li.innerHTML = `<strong>${place}${ordinalSuffix(place)}</strong> <span>Horse ${horse.id}</span> <span class="status">${formatTime(horse.finishTime)}</span>`;
+          resultList.appendChild(li);
+        });
+      results.style.display = "block";
+    }
+
+    function ordinalSuffix(n) {
+      const j = n % 10, k = n % 100;
+      if (j === 1 && k !== 11) return "st";
+      if (j === 2 && k !== 12) return "nd";
+      if (j === 3 && k !== 13) return "rd";
+      return "th";
+    }
+
+    form.addEventListener("submit", startRace);
+    resetBtn.addEventListener("click", resetRace);
+  </script>
+</body>
+</html>

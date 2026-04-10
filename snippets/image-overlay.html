@@ -1,0 +1,68 @@
+<html>
+<head>
+    <title>Ireland</title>
+
+	</head>
+<body>
+
+<div class="image-container">
+  <img class="ireland" src="ireland.jpg" alt="Map of Ireland" title="Ireland" usemap="#irelandmap">
+    <div class="overlay__text">This is some text</div>    
+  <div class="before"></div>
+</div>
+
+<!-- <div class="ireland"></div> -->
+
+<style>
+.image-container {
+  position: relative;
+  width: 400px;
+  height: 600px;
+}
+.ireland {
+    position: relative;
+    background-image: url("ireland.jpg");
+    height: 100%;
+    width: 100%;
+}
+.before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.6;
+  height: 100%;
+  width: 100%
+}
+.overlay__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+  z-index: 9;
+}
+@media screen and (max-width: 480px) {
+  .ireland::before {
+    content: none;
+  }
+}
+.ireland::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+.ireland::before, .ireland::after {
+    box-sizing: border-box;
+}
+</style>
+
+</body>
+</html>

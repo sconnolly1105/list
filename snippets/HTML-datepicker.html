@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+    <script type="text/javascript">
+        function addDays(theDate, days) {
+            return new Date(theDate.getTime() + days*24*60*60*1000);
+        }
+
+        function todaysDate () {
+                let datePickerDate = document.getElementById("date-picker");
+                let today = new Date();
+                let todayFull = new Date();
+                const mmm = today.toLocaleString('default', { month: 'long' })
+                const mm = today.getMonth() + 1;
+                const dd = today.getDate();
+                const yyyy = today.getFullYear();
+                console.log (`Today initial value: ${today}`);
+                // const dd = String(today.getDate()).padStart(2, '0');
+                // const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                // const yyyy = today.getFullYear();
+                today = `${mmm} ${dd} ${yyyy}`; 
+                today = `${yyyy}-${mm}-${dd}`; 
+                console.log(today);
+               datePickerDate.value = today;
+               datePickerDate.min = addDays(new Date(), -8);
+               datePickerDate.max = todayFull + addDays(new Date(), -4);
+                console.log(`datePickerDate.value: |${datePickerDate.value}|`)
+        }
+    
+        document.addEventListener("DOMContentLoaded", function(event) {
+            todaysDate ();
+        });
+    </script>
+    <label for="date-picker">Date Picker:</label>
+    <input type="date" id="date-picker" class="date-picker" name="date-picker" value="1955-03-04">
+</body>
+</html>
+
+
+

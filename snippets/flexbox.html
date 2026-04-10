@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<!--
+    <div class="container">
+        <div class="image">
+            <img src="../images/image-300x600.jpg" alt="">
+        </div>
+        <div class="image">
+            <img src="../images/image-500x800.jpg" alt="">
+        </div>
+        <div class="image">
+            <img src="../images/image-800x300.jpg" alt="">    
+        </div>
+    </div>
+-->
+
+<div class="container">
+    <div class="card">
+        <img src="../images/image-800x300.jpg" alt="">
+        <p>This is a description of the product.</p>
+        <p>Price: $29.99</p>
+    </div>
+    <div class="card">
+        <img src="../images/image-800x300.jpg" alt="">
+        <p>This is a description of the product.</p>
+        <p>Price: $29.99</p>
+    </div>
+    <div class="card">
+        <img src="../images/image-800x300.jpg" alt="">    
+        <p>This is a description of the product.</p>
+        <p>Price: $29.99</p>
+    </div>
+    <div class="card">
+        <img src="../images/image-800x300.jpg" alt=""> 
+        <p>This is a description of the product.</p>
+        <p>Price: $29.99</p>   
+    </div>
+    <div class="card">
+        <img src="../images/image-800x300.jpg" alt=""> 
+        <p>This is a description of the product.</p>
+        <p>Price: $29.99</p>
+    </div>
+</div>
+
+<style>
+
+    .card img {
+        max-width: 350px;
+        max-height: auto;
+        object-fit: cover;
+        flex: 1 0 auto;
+    }
+
+    .container {
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 15px;
+
+    }
+
+    .card p {
+        text-align: center;
+        line-height: .5rem !important;
+    }
+
+    /*.card {
+        flex: 1 0 300px;
+        width: 320px;
+        height: auto;
+        flex-basis: 300px;
+    }
+    .card {
+
+        width: 300px;
+        height: auto;
+        flex-basis: 300px;
+        flex: 1 0 300px;
+
+    }
+
+    .card img {
+
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
+
+
+    } */
+
+</style>
+ 
+</body>
+</html>

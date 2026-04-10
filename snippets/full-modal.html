@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<section id="hero">
+  <div class="container">
+    <nav>
+      <h1>Sugar and Spice</h1>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+  </nav>
+    <div class="content">
+      <p>We make good food</p>
+      <button id="show-modal">Learn More</button>
+  </div>
+</section>
+
+<div class="overlay overlay--hidden"></div>
+<div class="modal modal--hidden">
+  <div class="modal__contents">
+    <div class="modal__close-bar">
+      <span>X</span>
+    </div>
+    <p>Please enter your email address to find out more</p>
+    <form id="learn-more-form">
+
+    <input type="email" placeholder="Your Best Email">
+    <button id="submit">Submit</button>
+    </form>
+
+  </div>
+</div>
+
+<div class="link-to-video">
+  <a href="https://www.youtube.com/watch?v=zPe5R2qz_Ok&feature=youtu.be">Link to Youtube video</a>
+</div>
+
+</body>
+</html>
+
+<style>
+/* Variables */
+/* #3371d6: #3371d6;
+#204582: #204582; */
+
+body {
+  font-family: 'Lato', sans-serif;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+#hero {
+  background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.3)), url('https://images.pexels.com/photos/277253/pexels-photo-277253.jpeg');
+  background-size: cover;
+ height: 600px;
+  color: #fff;
+
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+}
+
+nav ul li {
+  font-weight: 700;
+  margin: 0 1rem;
+}
+
+.content {
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 100px auto;
+  font-size: 4rem;
+}
+
+.content button {
+  font-size: 2rem;
+  background-color: #3371d6;
+  color: #fff;
+  border: none;
+  padding: .5rem 2rem;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+
+.content button:hover {
+  background-color: #204582;
+}
+
+.overlay {
+    background-color: rgba(0,0,0,0.8);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    &--hidden {
+    display: none;
+  }
+  z-index: 99
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  transition: all .3s ease;
+  &--hidden {
+    display: none;
+  }
+  &__contents {
+    background-color: #fff;
+    padding: 2rem 4rem;
+    input[type=email] {
+      width: 100%;
+      padding: .5rem;
+    }
+    #submit{
+      width: 100%;
+      padding: .5rem;
+      background-color: #3371d6;
+      color: #fff;
+      border: none;
+      transition: all .3s ease;
+      &:hover {
+        background-color: #204582;
+      }
+    }
+  }
+  &__close-bar {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -2rem;
+    margin-top: -1rem;
+  }
+}
+
+/* Added by Sean C - January 13 2020 */
+.overlay {
+    background-color: unset;
+}
+.link-to-video {
+    text-align: center;
+    margin-top: 2rem;
+}
+</style>
+
+<script>
+const toggleModal = () => {
+  document.querySelector('.modal')
+    .classList.toggle('modal--hidden');
+  document.querySelector('.overlay')
+    .classList.toggle('overlay--hidden');
+}
+document.querySelector('#show-modal')
+  .addEventListener('click', toggleModal);
+
+document.querySelector('.overlay')
+  .addEventListener('click', toggleModal);
+
+document.querySelector('#learn-more-form')
+  .addEventListener('submit', (e) => {
+  e.preventDefault();
+  toggleModal();
+});
+
+document.querySelector('.modal__close-bar span')
+  .addEventListener('click', toggleModal);
+document.querySelector('.overlay')
+  .addEventListener('click', toggleModal);
+</script>

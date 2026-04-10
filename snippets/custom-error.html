@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <pre>
+            function customError() {
+                var num = 12;
+                alert('I am now in the function')
+                if (num > 10) {
+                    var myErr = { number: 20, description: "The entry must be < 11", owner: "Sean" }
+                    throw myErr;
+                }
+            }
+
+
+            try {
+                customError();
+            }
+            catch (err) {
+                    document.getElementById("demo").innerHTML = err.number + ' - ' + err.description + ' - ' + err.owner;
+            }
+    </pre>
+    <h1>JavaScript Errors</h1>
+
+    <p id="demo">
+
+        <script>
+            function customError() {
+                var num = 12;
+                if (num > 10) {
+                    var myErr = { number: 20, description: "The entry must be < 11", owner: "Sean" }
+                    throw myErr;
+                }
+            }
+
+
+            try {
+                customError();
+            }
+            catch (err) {
+                document.getElementById("demo").innerHTML = "Custom error: " + err.number + ' - ' + err.description + ' - ' + err.owner;
+            }
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<script>
+    const startTime = new Date();
+    const timeToWait = 5000        // Wait 5 seconds
+
+    setTimeout(() => {                                          // FIX 1: Removed erroneous (startTime) parameter
+        console.log(formattedElapsed(new Date() - startTime)); // FIX 2: start → startTime
+    }, timeToWait);
+
+    function formattedElapsed(elapsedTime) {
+        console.log(`Elapsed time in milliseconds: ${elapsedTime}`);
+
+        let hours   = 1000 * 60 * 60;
+        let minutes = 1000 * 60;
+        let seconds = 1000;
+
+        let elapsedHrs = Math.floor(elapsedTime / hours);
+        console.log(`Elapsed hours: ${elapsedHrs}`);
+        if (elapsedHrs > 0) {                                  // FIX 3: elapsedHours → elapsedHrs
+            elapsedTime = elapsedTime % (elapsedHrs * hours);  // FIX 4: was % (elapsedHrs * 60), needs * hours
+        }
+        console.log(`Elapsed time in milliseconds: ${elapsedTime}`);
+
+        let elapsedMins = Math.floor(elapsedTime / minutes);
+        console.log(`Elapsed minutes: ${elapsedMins}`);
+        if (elapsedMins > 0) {
+            elapsedTime = elapsedTime % (elapsedMins * minutes); // FIX 5: was % elapsedMins (missing * minutes)
+        }
+        console.log(`Elapsed time in milliseconds: ${elapsedTime}`);
+
+        let elapsedSecs = Math.floor(elapsedTime / seconds);
+        console.log(`Elapsed seconds: ${elapsedSecs}`);
+
+        let elapsedMillisecs = elapsedTime % seconds;           // FIX 6: was % elapsedSecs (wrong — should be remainder after removing full seconds)
+        console.log(`Elapsed milliseconds: ${elapsedMillisecs}`);
+
+        return `${elapsedHrs}:${elapsedMins}:${elapsedSecs}:${elapsedMillisecs}`;
+    }
+
+    function pad(number, size) {
+        let strNumber = String(number);                         // FIX 7: Missing let (implicit global)
+        while (strNumber.length < size) {
+            strNumber = "0" + strNumber;                        // FIX 8: was "0" + strNumber appended to itself
+        }
+        return strNumber;                                       // FIX 9: Missing return statement
+    }
+</script>

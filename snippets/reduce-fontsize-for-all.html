@@ -1,0 +1,140 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="S, Connolly" />
+<meta name="description" content="" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+<button id="down">-</button>
+<button id="up">+</button>
+
+<h1>Heading text</h1>
+<div>
+    <p>A div, with</p>
+    <ul>
+        <li>Various elements</li>
+    </ul>
+     <h2>And another heading</h2>
+
+    <aside>At this point, I'm sure that you get the point</aside>
+    <blockquote>But if you don't, then I'm sure it can be explained</blockquote>
+</div>
+
+<div class="image">
+    <img src="https://randomuser.me/api/portraits/men/6.jpg" width='300' height='300' alt="">
+</div>
+
+<style>
+/* This is more or less irrelevant, it's just to show
+   that the <body> element has an explicit font-size,
+   in pixels (but em would work also) */
+body {
+    font-size: 16px;
+}
+/* and all other elements have relative font-sizes,
+   basing their own font-size upon the inherited
+   font-size from their ancestors: */
+h1 {
+    font-size: 2em;
+}
+div {
+    font-size: 1em;
+}
+ul {
+    font-size: 1.2em;
+}
+h2 {
+    font-size: 1.5em;
+}
+aside {
+    font-size: 0.8em;
+}
+blockquote {
+    float: left;
+    font-size: 1.2em;
+    border-left: 2px solid #f90;
+    padding: 0.5em;
+}
+</style>
+
+<script>
+
+// $(document).ready(function() {
+
+// $('button').on('click', function(){
+//     // caching the clicked element:
+//     var clicked = this;
+//     // selecting the <body> element,
+//     // using the css() method to set the 'font-size'
+//     // via the anonymous function:
+//     $('body').css('font-size', function (i,size) {
+//         // i: the index of the current element in the collection
+//         // size: the current value of the current element
+
+//         // using parseInt to get a number in base-ten,
+//         // adding either 2 (if the clicked element was #up)
+//         // or -2 (if the clicked element was not #up):
+//         // appending 'px' to the number to make it a valid
+//         // css unit:
+//         return parseInt(size,10) + (clicked.id === 'up' ? 2 : -2) + 'px';
+//     });
+// });
+
+// });
+
+// Get the buttons
+const upButton = document.querySelector('#up');
+const downButton = document.querySelector('#down');
+
+// Get all elements on the page
+const elements = document.querySelectorAll('body *');
+
+// Set the initial font size
+let fontSize = 16;
+
+// Add click event listeners to the buttons
+upButton.addEventListener('click', () => {
+  // Increase the font size by 2
+  fontSize += 2;
+
+  // Update the font size of all text nodes
+  elements.forEach(element => {
+    // Check if the element is a text node
+    // if (element.nodeType === Node.TEXT_NODE) {
+    //   element.parentElement.style.fontSize = `${fontSize}px`;
+    // }
+    element.parentElement.style.fontSize = `${fontSize}px`;
+  });
+});
+
+downButton.addEventListener('click', () => {
+  // Decrease the font size by 2
+  fontSize -= 2;
+
+  // Update the font size of all text nodes
+  elements.forEach(element => {
+    // Check if the element is a text node
+    // if (element.nodeType === Node.TEXT_NODE) {
+    //   element.parentElement.style.fontSize = `${fontSize}px`;
+    // }
+    element.parentElement.style.fontSize = `${fontSize}px`;
+  });
+});
+
+</script>
+
+</body>
+
+</html>

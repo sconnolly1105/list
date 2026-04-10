@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chalk-browser@4.1.0/dist/chalk.js"></script>
+</head>
+<body>
+
+    <script>
+        // Example usage of chalk functions
+        const chalk = new Chalk(); // Access the chalk object from the window
+
+        const errorText = chalk.red('This is an error message');
+        const successText = chalk.green('This is a success message');
+        const infoText = chalk.blue('This is an info message');
+
+        console.log(errorText);
+        console.log(successText);
+        console.log(infoText);
+
+        // You can also chain styles
+        const styledText = chalk.red.bold.underline('This text is red, bold, and underlined');
+        console.log(styledText);
+    </script>
+    
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Covid cases using fetch</h2>
+    <label for="country">Country</label>
+    <div class="country"></div>
+    <label for="confirmed">Confirmed</label>
+    <div class="confirmed"></div>
+    <label for="recovered">Recovered</label>
+    <div class="recovered"></div>
+    <label for="critical">Critical</label>
+    <div class="critical"></div>
+    <label for="deaths">Deaths</label>
+   <div class="deaths"></div>
+
+<script>
+fetch("https://covid-19-data.p.rapidapi.com/country/code?code=ie", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "covid-19-data.p.rapidapi.com",
+		"x-rapidapi-key": "62786da53cmsh7dfd79a5b96f3ecp1c5108jsnc3e412d3375f"
+	}
+})
+.then(response => response.json())
+.then(data => {
+    const lang = window.document.documentElement.lang;
+    console.log (lang)
+    console.log(JSON.stringify(data, undefined, 4))
+    const country = data[0].country
+    let confirmed = data[0].confirmed
+    confirmed = parseFloat(confirmed).toLocaleString(lang);
+    let recovered = data[0].recovered
+    recovered = parseFloat(recovered).toLocaleString(lang);
+    let critical = data[0].critical
+    critical = parseFloat(critical).toLocaleString(lang);
+    let deaths = data[0].deaths
+    deaths = parseFloat(deaths).toLocaleString(lang);
+
+
+
+    console.log (country)
+    document.querySelector('.country').textContent = country
+    document.querySelector('.confirmed').textContent = confirmed
+    document.querySelector('.recovered').textContent = recovered
+    document.querySelector('.critical').textContent = critical
+    document.querySelector('.deaths').textContent = deaths
+
+})
+</script>
+
+<style>
+    div {
+        margin-bottom: 1em;
+        width: fit-content;
+        font-weight: 900;
+    }
+</style>
+</body>
+</html>

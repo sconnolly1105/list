@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="S. Connolly" />
+    <meta name="description" content="" />
+
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/chartStyles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script src="js/scripts.js"></script>
+
+</head>
+
+<body>
+
+    <div id="content-wrapper">
+        <label for="chart-picker">Type of chart</label>
+        <select id="chart-picker">
+                <option selected disabled>Select one of the following</option>
+                <option value="line" label="line">Line</option>
+                <option value="line-filled" label="line-filled">Line - Filled</option>
+                <option value="bar" label="bar">Bar</option>
+                <option value="pie" label="pie">Pie</option>
+                <option value="doughnut" label="doughnut">Doughnut</option>
+            </select>
+
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+</body>
+
+</html>

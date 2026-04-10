@@ -1,0 +1,135 @@
+<script>
+
+  console.clear();
+
+  function Mammal(name, legs) {
+    Mammal.prototype.name = "Mammal";
+    Mammal.prototype.legs = legs;
+    Mammal.prototype.flying = function () {
+      console.log(`My name is ${this.name} and I cannot fly. I have ${this.legs} legs`);
+    }
+  }
+
+  function Dog(name) {
+    this.name = name;
+  }
+
+  Dog.prototype = new Mammal();
+  //Dog.prototype = Object.create(Mammal.prototype);
+  //Dog.prototype.constructor = Dog;
+
+  function Cat(name) {
+    this.name = name;
+  }
+
+  Cat.prototype = Object.create(Mammal.prototype);
+  //Cat.prototype.constructor = Cat;
+
+  function Cheetah(name) {
+    this.name = name;
+  }
+
+  Cheetah.prototype = Mammal.prototype;
+
+  function Bat(name) {
+    this.name = name;
+    Bat.prototype.flying = function () {
+      console.log(`My name is ${this.name} and I can fly`);
+    }
+  }
+
+  Bat.prototype = Object.create(Mammal.prototype);
+  //Bat.prototype.constructor = Bat;
+
+  function Human(name, legs) {
+    this.name = name;
+    this.legs = legs;
+  }
+
+  Human.prototype = Object.create(Mammal.prototype);
+
+  var mammal = new Mammal("Mammal", 4);
+  var dog = new Dog("Fido");
+  var cat = new Cat("Fluffy");
+  var bat = new Bat("Batty");
+  var cheetah = new Cheetah("Speedy");
+  var human = new Human("Sean", 2);
+  //mammal.flying();
+  dog.flying();
+  cat.flying();
+  bat.flying();
+  cheetah.flying();
+  human.flying();
+
+</script>
+
+<body>
+
+  <h2>Check the console</h2>
+
+  <pre>
+    
+    console.clear();
+    
+    function Mammal (name, legs) {
+      Mammal.prototype.name = "Mammal";
+      Mammal.prototype.legs = legs;
+      Mammal.prototype.flying = function () {
+        console.log (`My name is ${this.name} and I cannot fly. I have ${this.legs} legs`);
+      }
+    }
+    
+    function Dog(name) {
+      this.name =   name;
+    }
+    
+    Dog.prototype = new Mammal();
+    //Dog.prototype = Object.create(Mammal.prototype);
+    //Dog.prototype.constructor = Dog;
+    
+    function Cat(name) {
+      this.name = name;
+    }
+    
+    Cat.prototype = Object.create(Mammal.prototype);
+    //Cat.prototype.constructor = Cat;
+    
+    function Cheetah(name) {
+      this.name = name;
+    }
+    
+    Cheetah.prototype = Mammal.prototype;
+    
+    function Bat(name) {
+      this.name = name;
+      Bat.prototype.flying = function () {
+        console.log (`My name is ${this.name} and I can fly`);
+      }
+    }
+    
+    Bat.prototype = Object.create(Mammal.prototype);
+    //Bat.prototype.constructor = Bat;
+    
+    function Human(name,legs) {
+      this.name = name;
+      this.legs = legs;
+    }
+    
+    Human.prototype = Object.create(Mammal.prototype);
+    
+    var mammal = new Mammal("Mammal",4);
+    var dog = new Dog ("Fido");
+    var cat = new Cat ("Fluffy");
+    var bat = new Bat ("Batty");
+    var cheetah = new Cheetah("Speedy");
+    var human = new Human ("Sean",2);
+    //mammal.flying();
+    dog.flying();
+    cat.flying();
+    bat.flying();
+    cheetah.flying();
+    human.flying();
+    
+  </pre>
+
+</body>

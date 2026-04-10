@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">
+    <meta name="dcterms.created" content="Sun, 03 Nov 2013 06:54:06 GMT">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title></title>
+
+    <style type="text/css">
+        <!-- body {
+            color: #000000;
+            background-color: #FFFFFF;
+        }
+
+        a {
+            color: #0000FF;
+        }
+
+        a:visited {
+            color: #800080;
+        }
+
+        a:hover {
+            color: #008000;
+        }
+
+        a:active {
+            color: #FF0000;
+        }
+
+        -->
+    </style>
+    <!--[if IE]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <script>
+
+        function GetSelectedItem() {
+            var e = document.getElementById("select1");
+            var strSel = "The Value is: " + e.options[e.selectedIndex].value + " and text is: " + e.options[e.selectedIndex].text;
+            alert(strSel);
+        }
+    </script>
+
+    <div>
+        <select id="select1">
+            <option value="1">test1</option>
+            <option value="2">test2</option>
+            <!--         <option value="2" selected="selected">test2</option> -->
+            <option value="3">test3</option>
+        </select>
+        <br/>
+        <button onClick="GetSelectedItem();">Get Selected Item</button>
+    </div>
+
+</body>
+
+</html>

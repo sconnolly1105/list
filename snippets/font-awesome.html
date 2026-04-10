@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/e5f66fd4f9.js" crossorigin="anonymous"></script>
+    <!-- <link rel=“stylesheet” href=“https://cdnjs.Cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css” /> -->
+    <!-- <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper">
+        <a href="http://xahlee.info/comp/unicode_hand_gesture.html" target="_blank">Good Unicode site</a>
+        <a href="https://codepen.io/kevinpowell/pen/jONomrd" target="_blank">Fun Expanding Search Bar</a>
+    </div>
+
+    <div class="container">
+        <h2>This is the title</h2>
+        <div class="social-media">
+            <i class="fa fa-youtube"></i aria-hidden="true"></i>
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+            <i class="fa fa-instagram" aria-hidden="true"></i>
+            <i class="fa fa-twitter fa-spin" aria-hidden="true"></i>
+            <i class="fa fa-linkedin" aria-hidden="true"></i>
+            <i class="fa fa-pinterest" aria-hidden="true"></i>
+            <i class="fa fa-snapchat" aria-hidden="true"></i>
+            <i class="fab fa-tiktok" aria-hidden="true"></i>
+            <i class="fab fa-tiktok fa-2x"></i>
+            <i class="fa fa-google" aria-hidden="true"></i>
+            <i class="fa fa-tumblr" aria-hidden="true"></i>
+            <i class="fa fa-vimeo" aria-hidden="true"></i>
+            <i class="fab fa-brands fa-github-square fa-2x"></i>
+            <i class="fas fa-cog fa-spin" aria-hidden="true"></i>
+            <i class="fa fa-light fa-user" style="font-size: 1.5em"></i>
+            <i class="fa fa-regular fa-user" style="font-size: 2.5em"></i>
+            <i class="fa fa-thin fa-user" style="font-size: 2.5em"></i>
+            <i class="fa fa-solid fa-plug"></i>
+            <i class="fas fa-solid fa-lightbulb fa-2x"></i>
+            <i class="fas fa-solid fa-phone fa-2x"></i>
+            <i class="fas fa-solid fa-phone fa-2x fa-rotate-90"></i>
+            <i class="fas fa-solid fa-paperclip fa-2x"></i>
+            <p class="fas fa-solid fa-pipe first"></p>
+            <p class="fa fa-check-circle" aria-hidden="true" style="color: #9b0409"></p>
+            <p class="fa fa-question-circle" aria-hidden="true" style="color: #9b0409"></p>
+            </div>
+        
+        <br>
+
+        <div>
+            <i class="fa fa-solid fa-quote-left fa-pull-left quote"></i>
+            Gatsby believed in the green light, the orgastic future that year by year recedes before us.
+            It eluded us then, but that’s no matter — tomorrow we will run faster, stretch our arms further...
+            And one fine morning — So we beat on, borne back ceaselessly into the past.
+            <i class="fa fa-solid fa-quote-right quote"></i>
+        </div>
+        
+        <br>
+
+        <div>
+            <i class="fa fa-solid fa-arrow-right fa-2x fa-pull-right fa-border"></i>
+            Gatsby believed in the green light, the orgastic future that year by year recedes before us.
+            It eluded us then, but that’s no matter — tomorrow we will run faster, stretch our arms further...
+            And one fine morning — So we beat on, boats against the current, borne back ceaselessly into the past.
+        </div>
+
+        <br>
+
+
+        <p>I will display &spades;<p>
+        <p>I will display &#x1f6a9;<p>
+        <p>I will display &#x1f94e;<p>
+        <p>I will display &#x1fa90;<p>
+        <p>I will display &#x1f41d;<p>
+        <p>I will display &#x1f98f;<p>
+        <p>I will display &#x1f98f;<p>
+        <p>I will display question mark <span class="question-mark">&#x3f;</span><p>
+        <p>I will display 🐨<p> 
+        <p>I will display 🇮🇪<p>
+    </div>
+</body>
+</html>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .fa+.fa {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 7px;
+    }
+    .fa-pull-right {
+        text-shadow: 3px 3px 6px #000;
+    }
+    .container {
+        width: 60em;
+        margin: 5% auto;
+        background-color: rgb(192, 240, 240, .7);
+        min-height: 25em;
+        padding: 25px;
+        border-radius: 10px;
+        -webkit-box-shadow: 15px 5px 45px 3px #A3A3A3; 
+        box-shadow: 15px 5px 45px 3px #A3A3A3;
+        transition: all .3s ease-in-out;
+    }
+    .container:hover {
+        -webkit-box-shadow: 15px 5px 85px 14px #A3A3A3; 
+        box-shadow: 15px 5px 45px 15px #A3A3A3;
+        transform: scale(1.01);
+        background-color: rgb(192, 240, 240, .85);
+    }
+    h2 {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    h2::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 400;
+        content: "\f0a4";
+        top: 0;
+        margin-right:5px;
+    }
+    h2::after {
+        content: "\1f94e";
+        top: 0;
+        margin-left:5px;
+    }
+    p.first {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .wrapper {
+        text-align: center; 
+        margin-top: 20px;
+    }
+    .wrapper * {
+        display: block;
+        line-height: 1.8;
+    }
+    .fa {
+        font-size: 1.2em;
+    }
+    .fa-twitter { color: #55acee; }
+    .fa-facebook { color: #3b5998; }
+    .fa-pinterest { color: #cc2127; }
+    .fa-google { color: #dd4b39; }
+    .fa-instagram { color: #833ab4; }
+    .fa-tumblr { color: #35465c; }
+    .fa-youtube { color: #b31217; }
+    .fa-vimeo { color: #1ab7ea; }
+    .fa-fancy { color: #3f454d; }
+    .fa-snapchat {color: #000 }
+    .question-mark {
+        background-color: red;
+        padding: 2px;
+        color: white;
+        border-radius: 50px;
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        text-align: center;
+    }
+    .quote {
+        font-size: .75rem;
+    }
+</style>

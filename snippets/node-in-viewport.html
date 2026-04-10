@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+    <H1>Below you’ll see an example where we have an image element being observed. <span style="color: red;">When 50% of the image is visible in the viewport upon scrolling, the fancy class gets added causing the image to spin.</span><br>
+        You will need to scroll down until 50% of the image is visible<br>
+        The 50% is defined in the below threshold. As this is an array, various items can be added. So something like <span style="color: green;">{ threshold: [.25, .5, .75] }</span> would cause the observer to fire whn 25%, 50% and 75% of the image was exposed. This means that discrete animations can be carried out depending on the amount of the image that is exposed in the viewport.<br></H1>
+        <br><br>
+        <br><br>
+      <img  class="animate-me" src="https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/322/322868/golden-retriever-puppy.jpg?w=1575" />
+
+      <H1>Above you’ll see an example where we have an image element being observed. <span style="color: red;">When 50% of the image is visible in the viewport upon scrolling, the fancy class gets added causing the image to spin.</span><br>
+        You will need to scroll down until 50% of the image is visible<br>
+        The 50% is defined in the below threshold. As this is an array, various items can be added. So something like <span style="color: green;">{ threshold: [.25, .5, .75] }</span> would cause the observer to fire whn 25%, 50% and 75% of the image was exposed. This means that discrete animations can be carried out depending on the amount of the image that is exposed in the viewport.<br></H1>
+
+      <script>
+        const image = document.querySelector('.animate-me'); 
+
+        observer = new IntersectionObserver((entries) => {
+        const [ myImg ] = entries;
+            console.log (myImg.intersectionRatio);
+            if (myImg.intersectionRatio > 0) {
+                myImg.target.classList.add('fancy');
+            } else {
+                myImg.target.classList.remove('fancy');
+            }
+        }, { threshold: [0.5] } , { rootMargin: "-50px" });
+
+        //************************************************************************************************ 
+        // Seting the threshold above to 0.5 means that the observer will only fire when 50% of the image is visible
+        // It will only fire once after loading so it is greate for lazy loading
+        // You can fire the observer multiple time, e.g. { threshold: [0.5, 0.75, 1] }
+        //
+        // Setting the rootMargin to -400px above ensures that 400 pixels of the element
+        // must be visible before the Observer fires.
+        // However, this will fire each time the user scrolls so it is better for image animation
+        //************************************************************************************************
+       
+        observer.observe(image);       
+    </script>
+
+    <style>
+        h1{
+        max-width:500px;
+        line-height:1.5;
+        margin-bottom:150px;
+        }
+        .fancy{
+        animation: anim1 .7s ease-out;
+        }
+
+
+        @keyframes anim1 {
+        0% {
+            opacity: 0;
+            transform: translateX(-30rem) rotate(-45deg);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+        }
+    </style>
+
+</body>
+</html>

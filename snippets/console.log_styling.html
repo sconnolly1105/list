@@ -1,0 +1,141 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <h2>Check the console panel</h2>
+
+  <script>
+
+    // function to show different colours for colsole.log messages
+    function colorLog(message, color) {
+
+      color = color || "black";
+
+      switch (color) {
+        case "success":
+          color = "Green";
+          break;
+        case "info":
+          color = "DodgerBlue";
+          break;
+        case "error":
+          color = "Red";
+          break;
+        case "warning":
+          color = "Orange";
+          break;
+        default:
+          color = color;
+      }
+
+      console.log(`%c${message}`, `background-color: ${color}; color: #fff`);
+    }
+
+    $(document).ready(function () {
+
+      console.group('Using a function to color code the log messages');
+      colorLog("Ordinary message");
+      colorLog("Success", "success");
+      colorLog("Info", "info");
+      colorLog("Error", "error");
+      colorLog("Warning", "warning");
+      console.groupEnd();
+
+      console.group('Using styling on the console.log');
+      console.log("%c%s", "color: red; background: yellow; font-size: 24px;", "WARNING!");
+      console.log("%cHello" + " %cWorld", "color: red; background-color: yellow; font-weight:bold; font-size: 18px;", "color:green; background-color: pink; font-weight:bold; font-size: 18px;");
+
+      let cssRule =
+        "color: rgb(249, 162, 34);" +
+        "font-size: 60px;" +
+        "font-weight: bold;" +
+        "text-shadow: 5px 5px 5px rgb(249, 162, 34);" +
+        "filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);";
+      console.log("%cHello World", cssRule);
+
+      let cssRule2 =
+        "color: rgb(249, 162, 34);" +
+        "font-size: 20px;" +
+        "font-weight: normal;" +
+        "text-shadow: 1px 1px 5px rgb(249, 162, 34);" +
+        "filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);";
+      let cssRule3 =
+        "color: rgb(249, 162, 34);" +
+        "background-color: yellow;" +
+        "color: red;" +
+        "font-size: 10px;" +
+        "font-weight: 300;" +
+        "text-shadow: 1px 1px 5px rgb(249, 162, 34);" +
+        "filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);";
+      console.log("%cHi " + "%cThere", cssRule2, cssRule3);
+      console.log("%cSome styled text ", cssRule3, "some unstyled text");
+      console.groupEnd();
+
+      // And now for something completely different - Lets's look at console.group
+      //--------------------------------------------------------------------------
+      console.group("CSS rules")
+      console.log(cssRule2);
+      console.log(cssRule3);
+      console.groupEnd();
+
+      let arr = [
+        { name: 'Tom', age: 40, hobbies: [{ hobby1: 'reading', hobby2: 'sports' }] },
+        { name: 'Dick', age: 30, hobbies: [{ hobby1: 'reading', hobby2: 'sports' }] },
+        { name: 'Harry', age: 20, hobbies: [{ hobby1: 'reading', hobby2: 'sports' }] }
+      ];
+      console.group("People");
+      arr.forEach(function (e, i) {
+        console.group(`Person ${i}`);
+        console.log(`Name: ${e.name}`);
+        console.log(`Age: ${e.age}`);
+        console.groupEnd();
+      });
+      console.groupEnd();
+
+      console.groupCollapsed("People");
+      arr.forEach(function (element) {
+        console.log(`Name ${element.name}  Age:${element.age}`);
+      });
+      console.groupEnd();
+
+      // Nested group
+      console.group("Query String Parameters");
+      console.log("foo: bar");
+      console.log("value: 42");
+      console.groupEnd();
+
+      // And now for something completely different again - Lets's look at console.log using the comma (with objects)
+      //-------------------------------------------------------------------------------------------------------------
+
+      // first look at console.table
+      console.group("Console.table");
+      console.table(arr);
+      console.groupEnd();
+
+      console.group("Console.log using + or comma - with objects");
+      console.log("a" + { name: "Sean" });     // [object Object]
+      console.log("a", { name: "Sean" });      // {name: "Sean"} - so the comma obviously works better
+      console.groupEnd();
+
+    });
+
+  </script>
+
+</body>
+
+</html>
+
+
+<!doctype html>
+
+<html lang="en">
+
+<head>

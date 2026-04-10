@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Web Components & Custom Elements</h1>
+    <div class='container'>
+        Clicking the button will change the name attribute in the component, thereby firing the attributeChangedCallback event which displays the changed attribute.<br>
+        selecting a new car in the dropdown changes the value attribute in the component, thereby firing the attributeChangedCallback event which displays the changed attribute.<br><br>
+        For this to work, bit attributes must be set as observed attribites in the observedAttributes method    
+    </div>
+
+    <test-component name='Sean' value='Volvo'>
+    </test-component>
+    
+ <script>
+const template = document.createElement('template');
+template.innerHTML = `
+  <style>
+    .test-component {
+        width: 60%;
+        margin: 0 auto;
+        background-color: #33FFBD;
+        height: 40vh;
+        padding: 20px 0 0 20px;
+    }
+    .button-wrapper {
+        margin-top: 20px;
+    }
+    #change-attribute {
+        padding: 7px 12px;
+        background-color: #000;
+        color: #fff;
+    }
+  </style>
+  <div class="test-component">
+    <label for="cars">Choose a car:</label>
+    <select name="cars" id="cars">
+      <option value="Volvo">Volvo</option>
+      <option value="Saab">Saab</option>
+      <option value="Mercedes">Mercedes</option>
+      <option value="Audi">Audi</option>
+    </select>
+    <div class='button-wrapper'>
+        <button id='change-attribute'>Change attribute</button>
+    </div>
+  </div>
+`;
+
+class testComponent extends HTMLElement {
+
+  static get observedAttributes() {
+    return ['name', 'value'];
+  }
+  constructor() {
+    super();
+
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+
+  connectedCallback() {
+    this.shadowRoot.querySelector('#change-attribute').addEventListener('click', () => this.changeAttribute());
+    this.shadowRoot.querySelector('select').addEventListener('change', (event) => {
+        document.querySelector ('test-component').setAttribute ('value', event.target.value)
+    });
+  }
+
+  disconnectedCallback() {
+    this.shadowRoot.querySelector('#toggle-info').removeEventListener();
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    alert (`${name} - ${oldVal} - ${newVal}`);
+  }
+
+  changeAttribute () {
+    document.querySelector ('test-component').setAttribute ('name', 'Mairead')
+  }
+
+}
+
+window.customElements.define('test-component', testComponent);
+
+ </script>
+
+<style>
+    h1 {
+        text-align: center;
+    }
+    .container {
+        width: 60%;
+        margin: 0 auto;
+        padding: 20px 0 20px 0;
+    }
+
+</style>
+
+</body>
+</html>

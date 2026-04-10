@@ -1,0 +1,64 @@
+<html>
+
+<head>
+  <script>
+    let arr = [
+      { name: "Sean", age: 63 },
+      { name: "Mairead", age: 63 },
+      { name: "Eavan", age: 39 },
+      { name: "Emmet", age: 38 },
+      { name: "Denise", age: 35 },
+      { name: "Lisa", age: 28 },
+    ];
+
+    let WorkerObject = function (entry) {
+      this.name = entry.name;
+      this.age = entry.age
+      this.showName = () => {
+        console.log(`Entry name: ${this.name}`);
+        return this;
+      },
+        this.showAge = () => {
+          console.log(`Entry age: ${this.age}`);
+          return this;
+        }
+    }
+    //let worker = new WorkerObject();
+
+    let WorkerObject2 = function () {
+      this.showName = function () {
+        console.log(`this.name: ${this.name}`);
+        return this;
+      },
+        this.showAge = function () {
+          console.log(`this.age: ${this.age}`);
+          return this;
+        }
+    }
+
+    let worker2 = new WorkerObject2;
+
+    arr.forEach((entry) => {
+      let worker = new WorkerObject(entry);
+      worker.showName(entry).showAge(entry);
+    });
+
+    arr.forEach(function (e) {
+      worker2.showName().showAge();
+    }.bind(this));
+
+// for (entry=0; entry<arr.length; entry++) {
+//     let that = arr[entry];
+//     let showName2 = worker2.showName.bind(that);
+//     let showAge2 = worker2.showAge.bind(that);
+//     showName2().showAge2();
+// };
+
+  </script>
+</head>
+
+<body>
+  <h2>Chaining Example - check the console</h2>
+</body>
+
+</html>

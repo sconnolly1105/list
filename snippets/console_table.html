@@ -1,0 +1,118 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="S, Connolly" />
+<meta name="description" content="" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css">
+
+
+</head>
+
+<body>
+
+<script>
+
+let myInt = 67;
+let myArr = [
+  {
+    name: "Sean",
+    age: 63,
+    children: [
+      {
+        name: "Eavan",
+        age: "38"
+      },
+      {
+        name: "Emmet",
+        age: "37"
+      },
+      {
+        name: "Denise",
+        age: "Lisa"
+      },
+      {
+        name: "Eavan",
+        age: "38"
+      },
+    ]
+  },
+  {
+    name: "Eavan",
+    age: 38,
+    children: [
+      {
+        name: "Ruby",
+        age: 3
+      }
+    ]
+  },
+  {
+    name: "Emmet",
+    age: 37
+  },
+  {
+    name: "Denise",
+    age: 34
+  },
+  {
+    name: "Lisa",
+    age: 27
+  }
+];
+
+$(document).ready(function() {
+
+  console.clear();
+
+  var child;
+
+  let idx = myArr.findIndex(family => family.name === 'Lisa');
+  let familyMember = myArr [idx];
+  familyMember.age = 19;
+  myArr [idx] = familyMember;
+  console.table(myArr);
+
+  idx = myArr.findIndex(family => family.name === 'Eavan');
+  familyMember = myArr [idx];
+  console.table(familyMember.children);
+
+  idx = myArr.findIndex(family => family.name === 'Mairead');
+  console.log (`Search for Mairead - idx: ${idx}`);
+
+  idx = myArr.findIndex(family => family.name === 'Emmet');
+  familyMember = myArr [idx];
+  var children = familyMember.children
+  if (children) {
+      idx = children.findIndex(child => child.name === 'Finn');
+      console.table (familyMember.children);
+    } else {
+      console.log ('Finn not found');
+      child = {
+        name: "Finn",
+        age: 4
+      };
+      familyMember.children = [];
+      familyMember.children.push(child);
+      myArr [idx] = familyMember;
+      console.log  ('Have pushed the child');
+      console.table (familyMember.children);
+      console.log(`${myArr[idx].name} has a child called ${myArr[idx].children[0].name} whose age is ${myArr[idx].children[0].age}`);
+  }
+
+});
+
+</script>
+
+</body>
+
+</html>

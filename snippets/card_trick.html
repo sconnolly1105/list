@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 21 Card Trick</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap');
+
+  :root {
+    --bg: #0f0e0c;
+    --felt: #1a2e1a;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f5f0e8;
+    --card-bg: #faf7f0;
+    --card-border: #d4c5a0;
+    --highlight: #4a7c59;
+    --highlight-bright: #6aaa7a;
+    --text-dim: #8a7a5a;
+    --red: #8b2020;
+    --column-1: #2a3d8f;
+    --column-2: #5a2a6a;
+    --column-3: #1a5a3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Courier Prime', monospace;
+    color: var(--cream);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px 60px;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(74,124,89,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.06) 0%, transparent 60%);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .stage-indicator {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+    align-items: center;
+  }
+
+  .stage-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #333;
+    border: 1px solid #555;
+    transition: all 0.4s ease;
+  }
+
+  .stage-dot.active {
+    background: var(--gold);
+    box-shadow: 0 0 8px var(--gold);
+    border-color: var(--gold-light);
+  }
+
+  .stage-dot.done {
+    background: var(--highlight);
+    border-color: var(--highlight-bright);
+  }
+
+  .instruction-box {
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 6px;
+    padding: 14px 22px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--cream);
+    min-height: 56px;
+    transition: all 0.3s ease;
+  }
+
+  .instruction-box em {
+    color: var(--gold-light);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* TABLE / GRID */
+  .table-wrap {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .column-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .column-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .column-label.col-0 { background: rgba(42,61,143,0.35); color: #8898df; border: 1px solid rgba(42,61,143,0.6); }
+  .column-label.col-1 { background: rgba(90,42,106,0.35); color: #c090d0; border: 1px solid rgba(90,42,106,0.6); }
+  .column-label.col-2 { background: rgba(26,90,58,0.35); color: #70c090; border: 1px solid rgba(26,90,58,0.6); }
+
+  .column-label.selectable {
+    cursor: pointer;
+    transform: scale(1.0);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .column-label.selectable:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 12px rgba(201,168,76,0.4);
+  }
+  .column-label.col-0.selectable:hover { background: rgba(42,61,143,0.7); }
+  .column-label.col-1.selectable:hover { background: rgba(90,42,106,0.7); }
+  .column-label.col-2.selectable:hover { background: rgba(26,90,58,0.7); }
+
+  .column-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card {
+    width: 64px;
+    height: 44px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2a2010;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    transition: all 0.35s ease;
+    font-family: 'Courier Prime', monospace;
+    position: relative;
+  }
+
+  .card.chosen {
+    background: #ffe033;
+    border-color: #ccaa00;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+    color: #1a1000;
+  }
+
+
+
+  .card.reveal {
+    background: var(--gold-light);
+    border-color: var(--gold);
+    animation: pulse-reveal 1s ease 3;
+    color: #2a1500;
+  }
+
+  @keyframes pulse-reveal {
+    0%, 100% { box-shadow: 0 0 8px rgba(201,168,76,0.4); }
+    50% { box-shadow: 0 0 24px rgba(201,168,76,0.9), 0 0 40px rgba(201,168,76,0.4); }
+  }
+
+  /* Linear display for final reveal */
+  .linear-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    max-width: 560px;
+    margin-bottom: 28px;
+  }
+
+  .linear-card {
+    width: 52px;
+    height: 38px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--card-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2a2010;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .linear-card .pos-label {
+    position: absolute;
+    bottom: 2px;
+    font-size: 0.45rem;
+    color: #aaa;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .linear-card.is-11 {
+    background: var(--gold-light);
+    border-color: var(--gold);
+    animation: pulse-reveal 1s ease 3;
+    color: #2a1500;
+    transform: scale(1.15);
+    box-shadow: 0 0 18px rgba(201,168,76,0.7);
+    z-index: 2;
+  }
+
+  .linear-card.is-11 .pos-label { color: var(--gold); }
+
+  /* Controls */
+  .controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  button {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: #1a1000;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid #444;
+  }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  .btn-col {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 9px 20px;
+    border-radius: 4px;
+    border: 1.5px solid;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-col-0 { background: rgba(42,61,143,0.2); color: #8898df; border-color: rgba(42,61,143,0.6); }
+  .btn-col-0:hover { background: rgba(42,61,143,0.5); }
+  .btn-col-1 { background: rgba(90,42,106,0.2); color: #c090d0; border-color: rgba(90,42,106,0.6); }
+  .btn-col-1:hover { background: rgba(90,42,106,0.5); }
+  .btn-col-2 { background: rgba(26,90,58,0.2); color: #70c090; border-color: rgba(26,90,58,0.6); }
+  .btn-col-2:hover { background: rgba(26,90,58,0.5); }
+
+  .result-msg {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    text-align: center;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    margin: 10px auto 20px;
+  }
+
+  /* Number input for chosen card display */
+  .chosen-display {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .chosen-display span {
+    color: var(--gold-light);
+    font-weight: 700;
+  }
+
+  /* Fade in animation */
+  .fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<h1>The 21-Card Trick</h1>
+<p class="subtitle">A Mathematical Demonstration</p>
+
+<div class="stage-indicator">
+  <div class="stage-dot active" id="dot0"></div>
+  <div class="stage-dot" id="dot1"></div>
+  <div class="stage-dot" id="dot2"></div>
+  <div class="stage-dot" id="dot3"></div>
+</div>
+
+<div class="instruction-box" id="instruction">
+  Think of any number in the grid below and remember it.<br>
+  When ready, click <em>GO</em>.
+</div>
+
+<div id="main-content"></div>
+
+<div class="controls" id="controls">
+  <button class="btn-primary" id="go-btn" onclick="handleGo()">GO</button>
+  <button class="btn-secondary" onclick="resetGame()">Reset</button>
+</div>
+
+<script>
+  // ── State ──────────────────────────────────────────────────────────────────
+  let cards = [];        // current order of 21 numbers (1–21)
+  let round = 0;         // 0 = initial, 1/2/3 = after each deal
+  let chosenNumber = null;
+  let phase = 'start';   // 'start' | 'ask' | 'reveal'
+
+  const COLS = 3;
+  const ROWS = 7;
+  const TOTAL = 21;
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+  function init() {
+    cards = Array.from({length: TOTAL}, (_, i) => i + 1);
+    round = 0;
+    chosenNumber = null;
+    phase = 'start';
+    updateDots(0);
+    setInstruction('Think of any number in the grid below and remember it.<br>When ready, click <em>GO</em>.');
+    renderGrid(cards, false, false);
+    document.getElementById('controls').innerHTML = `
+      <button class="btn-primary" onclick="handleGo()">GO</button>
+      <button class="btn-secondary" onclick="resetGame()">Reset</button>
+    `;
+  }
+
+  function resetGame() { init(); }
+
+  // ── Dots ───────────────────────────────────────────────────────────────────
+  function updateDots(active) {
+    for (let i = 0; i < 4; i++) {
+      const d = document.getElementById('dot' + i);
+      d.className = 'stage-dot';
+      if (i < active) d.classList.add('done');
+      else if (i === active) d.classList.add('active');
+    }
+  }
+
+  // ── Instruction ────────────────────────────────────────────────────────────
+  function setInstruction(html) {
+    const box = document.getElementById('instruction');
+    box.innerHTML = html;
+    box.classList.remove('fade-in');
+    void box.offsetWidth;
+    box.classList.add('fade-in');
+  }
+
+  // ── Render grid (3 columns × 7 rows) ──────────────────────────────────────
+  // cards: flat array of 21 numbers in DEAL ORDER (row-major)
+  // i.e. cards[0]=row0col0, cards[1]=row0col1, cards[2]=row0col2,
+  //      cards[3]=row1col0, cards[4]=row1col1, cards[5]=row1col2, etc.
+  // So column c contains cards at indices: c, c+3, c+6, c+9, c+12, c+15, c+18
+  function getColumn(flatCards, c) {
+    const col = [];
+    for (let r = 0; r < 7; r++) col.push(flatCards[r * 3 + c]);
+    return col;
+  }
+
+  function renderGrid(flatCards, showChosen, selectable) {
+    const colNames = ['Column 1', 'Column 2', 'Column 3'];
+
+    let html = '<div class="table-wrap fade-in">';
+    for (let c = 0; c < 3; c++) {
+      const col = getColumn(flatCards, c);
+      html += `<div class="column-wrapper">`;
+      const selClass = selectable ? ' selectable' : '';
+      const clickAttr = selectable ? ` onclick="chooseColumn(${c})"` : '';
+      html += `<div class="column-label col-${c}${selClass}"${clickAttr}>${colNames[c]}</div>`;
+      html += `<div class="column-cards">`;
+      for (let r = 0; r < 7; r++) {
+        const num = col[r];
+        let cardClass = 'card';
+        if (showChosen && num === chosenNumber) cardClass += ' chosen';
+        html += `<div class="${cardClass}">${num}</div>`;
+      }
+      html += `</div></div>`;
+    }
+    html += '</div>';
+
+    if (selectable) {
+      html += `<div class="controls fade-in">
+        <button class="btn-col btn-col-0" onclick="chooseColumn(0)">Column 1</button>
+        <button class="btn-col btn-col-1" onclick="chooseColumn(1)">Column 2</button>
+        <button class="btn-col btn-col-2" onclick="chooseColumn(2)">Column 3</button>
+        <button class="btn-secondary" onclick="resetGame()">Reset</button>
+      </div>`;
+      document.getElementById('controls').innerHTML = '';
+    } else {
+      document.getElementById('controls').innerHTML = `
+        <button class="btn-secondary" onclick="resetGame()">Reset</button>
+      `;
+    }
+
+    document.getElementById('main-content').innerHTML = html;
+  }
+
+  // ── Render linear (final reveal) ──────────────────────────────────────────
+  function renderLinear(flatCards) {
+    // After 3rd reassembly, show as a linear pack
+    let html = '<div class="linear-display fade-in">';
+    for (let i = 0; i < 21; i++) {
+      const num = flatCards[i];
+      const isMiddle = (i === 10); // 0-indexed position 10 = card #11
+      let cls = 'linear-card';
+      if (isMiddle) cls += ' is-11';
+      html += `<div class="${cls}">${num}<span class="pos-label">#${i+1}</span></div>`;
+    }
+    html += '</div>';
+    document.getElementById('main-content').innerHTML = html;
+    document.getElementById('controls').innerHTML = `
+      <button class="btn-primary" onclick="resetGame()">Play Again</button>
+    `;
+  }
+
+  // ── Collect a column from row-major flat array into a top-to-bottom array ──
+  // Then stack the 3 columns (chosen in middle) and re-deal row by row
+  function reassembleAndDeal(flatCards, chosenCol) {
+    // Extract each column top-to-bottom
+    const col0 = getColumn(flatCards, 0);
+    const col1 = getColumn(flatCards, 1);
+    const col2 = getColumn(flatCards, 2);
+
+    // Stack: left | chosen(middle) | right  — each column read top-to-bottom
+    let stack;
+    if (chosenCol === 0) stack = [...col1, ...col0, ...col2];
+    else if (chosenCol === 1) stack = [...col0, ...col1, ...col2];
+    else stack = [...col0, ...col2, ...col1];
+
+    // Re-deal row by row left to right: card 0→col0, 1→col1, 2→col2, 3→col0 …
+    // Store back as row-major flat array
+    const newCards = new Array(21);
+    for (let i = 0; i < 21; i++) {
+      const col = i % 3;
+      const row = Math.floor(i / 3);
+      newCards[row * 3 + col] = stack[i];
+    }
+    return newCards;
+  }
+
+  // ── After 3rd column choice: just stack (no re-deal), return linear order ──
+  function finalStack(flatCards, chosenCol) {
+    const col0 = getColumn(flatCards, 0);
+    const col1 = getColumn(flatCards, 1);
+    const col2 = getColumn(flatCards, 2);
+
+    if (chosenCol === 0) return [...col1, ...col0, ...col2];
+    else if (chosenCol === 1) return [...col0, ...col1, ...col2];
+    else return [...col0, ...col2, ...col1];
+  }
+
+  // ── Handlers ──────────────────────────────────────────────────────────────
+  function handleGo() {
+    round = 1;
+    phase = 'ask';
+    updateDots(1);
+    setInstruction(`<em>Deal 1</em> — Which column contains your number?<br>Click the column label or button below.`);
+    renderGrid(cards, false, true);
+  }
+
+  function chooseColumn(col) {
+    if (round === 1) {
+      cards = reassembleAndDeal(cards, col);
+      round = 2;
+      updateDots(2);
+      setInstruction(`<em>Deal 2</em> — Here is the new layout. Which column contains your number now?`);
+      renderGrid(cards, false, true);
+
+    } else if (round === 2) {
+      cards = reassembleAndDeal(cards, col);
+      round = 3;
+      updateDots(3);
+      setInstruction(`<em>Deal 3</em> — One last time. Which column contains your number?`);
+      renderGrid(cards, false, true);
+
+    } else if (round === 3) {
+      // Final: stack with chosen in middle, re-deal into grid, highlight #11
+      const stack = finalStack(cards, col);
+      chosenNumber = stack[10]; // position 11, 0-indexed = 10
+
+      // Re-deal the stack row-by-row into a new row-major grid
+      const finalCards = new Array(21);
+      for (let i = 0; i < 21; i++) {
+        const c = i % 3;
+        const r = Math.floor(i / 3);
+        finalCards[r * 3 + c] = stack[i];
+      }
+
+      updateDots(4);
+      setInstruction(`Your number is <em>${chosenNumber}</em> — highlighted in the grid below.`);
+      renderGrid(finalCards, true, false);
+      document.getElementById('controls').innerHTML = `
+        <button class="btn-primary" onclick="resetGame()">Play Again</button>
+      `;
+    }
+  }
+
+  // ── Start ──────────────────────────────────────────────────────────────────
+  init();
+</script>
+</body>
+</html>

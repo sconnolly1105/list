@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2 style="text-align: center;">Look how the subtitle adjusts for smaller devices</h2>
+    <h3 class="title abs-title">
+        <span class="title-main">Main Title Here</span>
+        <span class="title-note">This is absolutely positioned.</span>
+      </h3>
+      
+      <h3 class="title float-title">
+        <span class="title-main">Main Title Here</span>
+        <span class="title-note">This subtitle is floated.</span>
+      </h3>
+      
+      <h3 class="title table-title">
+        <span class="title-main">Main Title Here</span>
+        <span class="title-note">I am a table cell.</span>
+      </h3>
+      
+      <h3 class="title flex-title">
+        <span class="title-main">Main Title Here</span>
+        <span class="title-note">This is a good look, right here (Flexbox).</span>
+      </h3>
+
+ <style>
+        body {
+        padding: 100px;
+        font-size: 21px;
+        }
+
+        .title {
+        border-bottom: 1px solid #ccc;
+        max-width: 500px;
+        margin: 40px auto;
+        }
+        .title-note {
+        font-size: 60%;
+        color: #999;
+        }
+
+        .abs-title {
+        position: relative;
+        }
+        .abs-title .title-note {
+            position: absolute;
+            bottom: 2px;
+            right: 0;
+        }
+
+
+        .float-title .title-note {
+            float: right;
+            position: relative;
+            top: 12px;
+        }
+
+        .table-title {
+        display: table;
+        width: 100%;
+        }
+        .table-title > span {
+            display: table-cell;
+            white-space: nowrap;
+        }
+        .table-title .title-main {
+            width: 99%;
+        }
+
+
+
+        .flex-title {
+        display: flex;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        }
+        .flex-title > span {
+            white-space: nowrap;
+        }
+        .flex-title .title-main {
+            flex-grow: 1;
+        }
+
+
+ </style>     
+</body>
+</html>

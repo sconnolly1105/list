@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+        <p>Choose your colors:</p>
+
+        <div>
+            <input type="color" id="main" name="head"
+                   value="#e66465">
+            <label for="head">Main colour</label>
+        </div>
+        
+        <div>
+            <input type="color" id="inverted" name="body"
+                    value="#f6b73c">
+            <label for="body">Inverted Colour</label>
+        </div>
+
+<script>
+function invertColor(hex) {
+    if (hex.indexOf('#') === 0) {
+        hex = hex.slice(1);
+    }
+    // convert 3-digit hex to 6-digits.
+    if (hex.length === 3) {
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    }
+    if (hex.length !== 6) {
+        throw new Error('Invalid HEX color.');
+    }
+    // invert color components
+    const rawR = parseInt(hex.slice(0,2), 16).toString(16);
+    console.log (`rawR: ${rawR}`);
+    const r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
+        g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
+        b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
+        console.log (r,g,b);
+    // pad each with zeros and return
+    return '#' + padZero(r) + padZero(g) + padZero(b);
+}
+
+function padZero(str, len) {
+    len = len || 2;
+    var zeros = new Array(len).join('0');
+    return (zeros + str).slice(-len);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// decimal to hex conversion
+// -------------------------
+let testNumb = 214;
+let testHex = testNumb.toString(16);
+console.log (`dec: ${testNumb} - hex: ${testHex}`);
+
+// and convert it back to decimal
+// ------------------------------
+testHex = 'f6';
+testNumb = parseInt(testHex, 16);
+console.log (`testHex: ${testHex} - testNumb: ${testNumb}`);
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+const main = document.getElementById('main');
+const inverted = document.getElementById('inverted');
+
+main.addEventListener("change", function(){
+    mainColor = main.value;
+    const invertedColor = invertColor (mainColor);
+    inverted.value = invertedColor;
+    console.log (`The main colour is : ${mainColor}`);
+    console.log (`The inverted colour is : ${invertedColor}`);
+});
+
+</script>
+
+<style>
+    input {
+        width: 10vh;
+        height: 10vh;
+    }
+    input:first-child {
+        margin-bottom: 2rem;
+    }
+</style>
+</body>
+</html>

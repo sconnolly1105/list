@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to Intersection Observer - Kevin Powell</title>
+
+    <style>
+        .container {
+            width: 30%;
+            margin: 20px auto;
+        }
+        section {
+            border: 5px dashed #000;
+            margin: 20px;
+            padding: 10px;
+        }
+        .section-1 {
+            background-color: green;
+            color: rgb(241, 223, 223);
+        }
+        .section-2 {
+            background-color: rgb(8, 249, 8);
+            color: rgb(241, 223, 223);
+        }
+        .section-3 {
+            background-color: rgb(22, 190, 22);
+            color: rgb(241, 223, 223);
+        }
+        .section-4 {
+            background-color: rgb(123, 231, 123);
+            color: rgb(241, 223, 223);
+        }
+        .section-5 {
+            background-color: rgb(168, 221, 168);
+            color: rgb(241, 223, 223);
+        }
+        .fancy {
+            color: red;
+            background-color: rgb(250, 236, 236);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+
+        <h1>Intersection Observer Intro</h1>
+
+        <div style='font-size: 40px;'>
+        The page is broken into different sections, each section been bounded by a thick dashed border. <br>
+        As you scroll down The screen and 50% of the section is in the viewport then the colour of the section will change<br>
+        As you scroll further down and less than 50% is in the viewport then the section colours will change back.<br>
+        Scrolling back up until 50% is again in the viewport causes the colours to be applied once again.
+        </div>
+
+        <section  class="section section-1">
+            <h2>Section 1</h2>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et suscipit libero, id ornare elit. In bibendum turpis a magna blandit, in sollicitudin magna vehicula. Sed imperdiet ligula ligula. In id faucibus magna. Mauris pharetra sagittis urna ac lacinia. Nunc varius pulvinar leo, eu scelerisque metus eleifend et. Nunc erat turpis, scelerisque commodo nisi nec, dapibus pellentesque ipsum. Cras ullamcorper purus a sapien porttitor, vel aliquam tellus condimentum. Maecenas sodales arcu ac urna elementum, efficitur egestas libero ornare. Nulla ac ex quis sapien scelerisque blandit vitae ac purus.
+    
+            Aliquam pretium volutpat nulla, a rhoncus elit pharetra a. Integer at diam sed justo commodo luctus at vel mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas non porta leo, eget tincidunt velit. Nam eleifend bibendum ligula ac semper. Proin pretium feugiat hendrerit. Nulla ultricies nunc eget dapibus consequat. Suspendisse convallis erat at metus maximus, eget hendrerit magna efficitur. Aliquam pharetra, tortor ut finibus ullamcorper, elit nulla pretium lorem, luctus facilisis diam leo porta ligula. Cras eu elit aliquam, commodo turpis a, aliquam erat. Cras commodo a mauris vel varius. Sed a ante vitae tellus lobortis commodo.
+            
+            Praesent ac cursus leo, id ultricies justo. Vivamus ac urna efficitur nulla euismod aliquet. Aenean mauris diam, semper vel placerat quis, porta eget eros. Donec et pellentesque felis. In hac habitasse platea dictumst. Aliquam a cursus dui, quis tempus ipsum. Duis sed egestas ligula.       
+        </section>
+    
+        <section  class="section section-2">
+            <h2>Section 2</h2>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et suscipit libero, id ornare elit. In bibendum turpis a magna blandit, in sollicitudin magna vehicula. Sed imperdiet ligula ligula. In id faucibus magna. Mauris pharetra sagittis urna ac lacinia. Nunc varius pulvinar leo, eu scelerisque metus eleifend et. Nunc erat turpis, scelerisque commodo nisi nec, dapibus pellentesque ipsum. Cras ullamcorper purus a sapien porttitor, vel aliquam tellus condimentum. Maecenas sodales arcu ac urna elementum, efficitur egestas libero ornare. Nulla ac ex quis sapien scelerisque blandit vitae ac purus.
+    
+            Aliquam pretium volutpat nulla, a rhoncus elit pharetra a. Integer at diam sed justo commodo luctus at vel mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas non porta leo, eget tincidunt velit. Nam eleifend bibendum ligula ac semper. Proin pretium feugiat hendrerit. Nulla ultricies nunc eget dapibus consequat. Suspendisse convallis erat at metus maximus, eget hendrerit magna efficitur. Aliquam pharetra, tortor ut finibus ullamcorper, elit nulla pretium lorem, luctus facilisis diam leo porta ligula. Cras eu elit aliquam, commodo turpis a, aliquam erat. Cras commodo a mauris vel varius. Sed a ante vitae tellus lobortis commodo.
+            
+            Praesent ac cursus leo, id ultricies justo. Vivamus ac urna efficitur nulla euismod aliquet. Aenean mauris diam, semper vel placerat quis, porta eget eros. Donec et pellentesque felis. In hac habitasse platea dictumst. Aliquam a cursus dui, quis tempus ipsum. Duis sed egestas ligula.
+        </section>
+    
+        <section class="section section-3">
+            <h2>Section 3</h2>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et suscipit libero, id ornare elit. In bibendum turpis a magna blandit, in sollicitudin magna vehicula. Sed imperdiet ligula ligula. In id faucibus magna. Mauris pharetra sagittis urna ac lacinia. Nunc varius pulvinar leo, eu scelerisque metus eleifend et. Nunc erat turpis, scelerisque commodo nisi nec, dapibus pellentesque ipsum. Cras ullamcorper purus a sapien porttitor, vel aliquam tellus condimentum. Maecenas sodales arcu ac urna elementum, efficitur egestas libero ornare. Nulla ac ex quis sapien scelerisque blandit vitae ac purus.
+    
+            Aliquam pretium volutpat nulla, a rhoncus elit pharetra a. Integer at diam sed justo commodo luctus at vel mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas non porta leo, eget tincidunt velit. Nam eleifend bibendum ligula ac semper. Proin pretium feugiat hendrerit. Nulla ultricies nunc eget dapibus consequat. Suspendisse convallis erat at metus maximus, eget hendrerit magna efficitur. Aliquam pharetra, tortor ut finibus ullamcorper, elit nulla pretium lorem, luctus facilisis diam leo porta ligula. Cras eu elit aliquam, commodo turpis a, aliquam erat. Cras commodo a mauris vel varius. Sed a ante vitae tellus lobortis commodo.
+            
+            Praesent ac cursus leo, id ultricies justo. Vivamus ac urna efficitur nulla euismod aliquet. Aenean mauris diam, semper vel placerat quis, porta eget eros. Donec et pellentesque felis. In hac habitasse platea dictumst. Aliquam a cursus dui, quis tempus ipsum. Duis sed egestas ligula.   
+        </section>
+    
+        <section class="section section-4">
+            <h2>Section 4</h2>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et suscipit libero, id ornare elit. In bibendum turpis a magna blandit, in sollicitudin magna vehicula. Sed imperdiet ligula ligula. In id faucibus magna. Mauris pharetra sagittis urna ac lacinia. Nunc varius pulvinar leo, eu scelerisque metus eleifend et. Nunc erat turpis, scelerisque commodo nisi nec, dapibus pellentesque ipsum. Cras ullamcorper purus a sapien porttitor, vel aliquam tellus condimentum. Maecenas sodales arcu ac urna elementum, efficitur egestas libero ornare. Nulla ac ex quis sapien scelerisque blandit vitae ac purus.
+    
+            Aliquam pretium volutpat nulla, a rhoncus elit pharetra a. Integer at diam sed justo commodo luctus at vel mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas non porta leo, eget tincidunt velit. Nam eleifend bibendum ligula ac semper. Proin pretium feugiat hendrerit. Nulla ultricies nunc eget dapibus consequat. Suspendisse convallis erat at metus maximus, eget hendrerit magna efficitur. Aliquam pharetra, tortor ut finibus ullamcorper, elit nulla pretium lorem, luctus facilisis diam leo porta ligula. Cras eu elit aliquam, commodo turpis a, aliquam erat. Cras commodo a mauris vel varius. Sed a ante vitae tellus lobortis commodo.
+            
+            Praesent ac cursus leo, id ultricies justo. Vivamus ac urna efficitur nulla euismod aliquet. Aenean mauris diam, semper vel placerat quis, porta eget eros. Donec et pellentesque felis. In hac habitasse platea dictumst. Aliquam a cursus dui, quis tempus ipsum. Duis sed egestas ligula.   
+        </section>
+    
+        <section class="section section-5">
+            <h2>Section 5</h2>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et suscipit libero, id ornare elit. In bibendum turpis a magna blandit, in sollicitudin magna vehicula. Sed imperdiet ligula ligula. In id faucibus magna. Mauris pharetra sagittis urna ac lacinia. Nunc varius pulvinar leo, eu scelerisque metus eleifend et. Nunc erat turpis, scelerisque commodo nisi nec, dapibus pellentesque ipsum. Cras ullamcorper purus a sapien porttitor, vel aliquam tellus condimentum. Maecenas sodales arcu ac urna elementum, efficitur egestas libero ornare. Nulla ac ex quis sapien scelerisque blandit vitae ac purus.
+    
+            Aliquam pretium volutpat nulla, a rhoncus elit pharetra a. Integer at diam sed justo commodo luctus at vel mi. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas non porta leo, eget tincidunt velit. Nam eleifend bibendum ligula ac semper. Proin pretium feugiat hendrerit. Nulla ultricies nunc eget dapibus consequat. Suspendisse convallis erat at metus maximus, eget hendrerit magna efficitur. Aliquam pharetra, tortor ut finibus ullamcorper, elit nulla pretium lorem, luctus facilisis diam leo porta ligula. Cras eu elit aliquam, commodo turpis a, aliquam erat. Cras commodo a mauris vel varius. Sed a ante vitae tellus lobortis commodo.
+            
+            Praesent ac cursus leo, id ultricies justo. Vivamus ac urna efficitur nulla euismod aliquet. Aenean mauris diam, semper vel placerat quis, porta eget eros. Donec et pellentesque felis. In hac habitasse platea dictumst. Aliquam a cursus dui, quis tempus ipsum. Duis sed egestas ligula.       
+        </section>
+    
+    </div>
+    
+</body>
+
+<script>
+    const options = {
+        root: null,            // null = viewport
+        threshold: [ 0 ],      // this is an array so I could have [ .1, .5 ]
+        rootMargin: "-550px"
+    };
+
+    const sectionOne = document.querySelector('.section-1');
+    const sections = document.querySelectorAll ('section');
+
+    const observer = new IntersectionObserver (function(entries, observer) {
+        entries.forEach (entry => {
+            if (entry.intersectionRatio >= .5 && entry.intersectionRatio <=1) {
+                entry.target.classList.add ('fancy');
+            } else {
+                entry.target.classList.remove ('fancy');
+            };
+            console.log (entry.target, entry.isIntersecting, entry.intersectionRatio);
+        })
+    }, options);
+
+    sections.forEach (section => {
+        observer.observe (section);
+    })
+</script>
+
+</html>

@@ -1,0 +1,123 @@
+<script>
+
+  function Car(make, colour) {
+    this.colour = colour;
+    Car.prototype.type = "right-hand-drive";
+
+    Car.prototype.showColour = function () {
+      alert("The color of the car is " + this.colour);
+    }
+
+    var _make;
+
+    this.setMake = function () {
+      var validMakes = ",mercedes,ford,thunderbird,";
+      var lowercaseMake = ',' + make.toLowerCase() + ',';
+      if (validMakes.indexOf(lowercaseMake) >= 0) {
+        _make = make;
+      } else {
+        _make = '';
+        throw "The car make entered was invalid - " + make;
+      }
+    }
+
+    this.setMake();
+
+    this.showMake = function () {
+      alert("The make of the car is " + _make);
+    }
+
+  }
+
+  car1 = new Car("Mercedes", "Black");
+  car2 = new Car("Ford", "Red");
+  car3 = new Car("Thunderbird", "Yellow");
+  car3.type = "left-hand-drive";
+  car3.showColour = function () {
+    alert("This is a US car\nThe color of the car is " + this.colour);
+  }
+
+  try {
+    car4 = new Car("VW", "blue");
+  } catch (e) {
+    alert(e);
+  }
+
+  var objects = [{ name: "Sean", address: "Oranmore", age: 62 }, { name: "Brendan", address: "Loughrea", age: 36 }];
+
+  for (var o in objects) {
+    console.log(objects[o].name + " - " + objects[o].address + " - " + objects[o].age);
+  }
+
+  for (var o of objects) {
+    console.log(o.name + ' | ' + o.address);
+  }
+
+
+//  car4.showMake();
+//  car1.setMake();
+
+</script>
+
+<body>
+  <pre>    
+      function Car (make,colour) {
+        this.colour = colour;
+        Car.prototype.type = "right-hand-drive";
+    
+        Car.prototype.showColour = function () {
+          alert ("The color of the car is " + this.colour);
+        }
+    
+        var _make;
+    
+        this.setMake = function () {
+          var validMakes = ",mercedes,ford,thunderbird,";
+          var lowercaseMake = ',' + make.toLowerCase() + ',';
+          if (validMakes.indexOf(lowercaseMake) >= 0) {
+            _make = make;
+          } else {
+            _make = '';
+            throw "The car make entered was invalid - " + make;
+          }
+        }
+    
+        this.setMake ();
+    
+        this.showMake = function () {
+         alert ("The make of the car is " + _make);
+        }
+    
+      }
+    
+      car1 = new Car ("Mercedes" , "Black");
+      car2 = new Car ("Ford", "Red");
+      car3 = new Car ("Thunderbird", "Yellow");
+      car3.type = "left-hand-drive";
+      car3.showColour = function () {
+        alert ("This is a US car\nThe color of the car is " + this.colour);
+      }
+    
+      try {
+        car4 = new Car ("VW","blue");
+      } catch (e) {
+        alert (e);
+      }
+    
+    var objects = [{name:"Sean", address:"Oranmore", age:62},{name:"Brendan", address:"Loughrea", age:36}];
+    
+    for (var o in objects) {
+      console.log (objects[o].name + " - " + objects[o].address + " - " + objects[o].age);
+    }
+    
+    for (var o of objects) {
+      console.log (o.name + ' | ' + o.address);
+    }
+    
+    
+    //  car4.showMake();
+    //  car1.setMake();
+    
+  </pre>
+
+</body>
