@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>** Higgins Family Tree **</title>
+
+  <!-- Your original CSS (kept) -->
+  <link rel="stylesheet" type="text/css" href="css/myCSS.css">
+  <link rel="stylesheet" href="css/style.min.css" />
+
+  <!-- Minimal inline CSS to ensure .clickable looks interactive even if external CSS is missing -->
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+    .clickable { cursor: pointer; text-decoration: underline; }
+    #outer {
+      display:none; position: fixed; right: 16px; top: 16px; background: #fff;
+      border: 1px solid #ccc; border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      z-index: 1000; overflow: hidden;
+    }
+    #header {
+      background: #f5f5f5; border-bottom: 1px solid #e5e5e5; padding: 6px 10px;
+      display: flex; justify-content: space-between; align-items: center; font-weight: 600;
+    }
+    #close { cursor: pointer; padding: 0 6px; }
+    #inner { padding: 8px; overflow: auto; }
+    #info p { margin: 0.25rem 0; }
+    h2 { display: inline-block; margin: 1rem 0 0.25rem; }
+  </style>
+
+  <!-- jQuery + jQuery UI + jsTree from CDN for a one-file demo (your local paths are preserved below too) -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.16/jstree.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.16/themes/default/style.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="javascript/myScript.js"></script>
+</head>
+<body>
+
+  <div id="info">
+    <p>Any queries/information can be directed to&nbsp;</p>
+    <p>Sean Connolly</p>
+    <p>email: <a href="mailto:connolly.maree@gmail.com?Subject=Higgins Family Tree">connolly.maree@gmail.com</a></p>
+    <p>Mobile: 353 87 2219183</p>
+  </div>
+
+  <h2><i>Higgins Family Tree</i></h2>&nbsp;&nbsp;&nbsp;(Click on name for further information)
+  <br><br>
+
+  <div id="data">
+    <!-- jsTree source UL – rendered from JSON below -->
+    <ul id="org" style="display:none"></ul>
+  </div>
+
+  <!-- Floating info panel (kept) -->
+  <div id="outer">
+    <div id="header">
+      <span id="heading">Information on Individual</span>
+      <span id="close" title="close" onclick="return closeDiv()">x</span>
+    </div>
+    <div id="inner"></div>
+  </div>
+
+  <!-- Your original local script references (kept). They are optional here because we inline the logic below. -->
+  <!-- <script src="javascript/jquery-1.12.4.js"></script> -->
+  <!-- <script type="text/javascript" src="javascript/myScript.js"></script> -->
+  <!-- <script src="javascript/jstree.min.js"></script> -->
+  <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script> -->
+
+  <script>
+/***** FAMILY TREE DATA (JSON) *****
+Schema per node:
+{
+  id: "H100",                 // <li id="...">
+  label: "Visible text",      // text shown in the node
+  code: "H00090",             // optional: passed to readXML('...') when present
+  opened: true,               // optional: initial expansion state (jsTree)
+  children: [ ... ]           // optional: nested nodes
+}
+***********************************/
+const familyTreeData = {
+  id: "H50",
+  label: "Bartley Higgins : married to Mary Conroy born c.1821",
+  opened: true,
+  children: [
+    {
+      id: "H100",
+      label: "Sean Higgins c.1861-Feb 7, 1942 : married to Mary O'Toole born c.1864-Feb 7, 1947",
+      opened: true,
+      children: [
+        {
+          id: "H150",
+          label: "Bartley born Aug 4, 1888 : married to Mary McCabe",
+          code: "H00090",
+          children: [
+            { id: "H200", label: "Mary born 1908 (Scotland)", code: "H99999" },
+            {
+              id: "H250",
+              label: "Alice(Mervue) : married Gerry O'Leary",
+              code: "H99999",
+              children: [
+                { id: "H300", label: "Joan", code: "H99999" },
+                { id: "H350", label: "Bertie", code: "H99999" },
+                { id: "H400", label: "Mary (New York)", code: "H99999" },
+                { id: "H450", label: "Bridie", code: "H99999" },
+                { id: "H500", label: "Claire lives in Mervue) : married to Johnny Bartley (surname))", code: "H99999" },
+                { id: "H550", label: "Patricia (deceased)", code: "H99999" }
+              ]
+            },
+            { id: "H600", label: "Bridie : nun in Scotland", code: "H99999" },
+            {
+              id: "H650",
+              label: "Sean (Mervue)",
+              code: "H99999",
+              children: [
+                { id: "H700", label: "Joe (Salthill)", code: "H99999" },
+                { id: "H750", label: "Rita Ann Higgins (Mervue)", code: "H99999" },
+                { id: "H800", label: "7 other children", code: "H99999" },
+                { id: "H850", label: "Carmel Frost (Florida) : 2nd marriage", code: "H99999" },
+                { id: "H900", label: "Daughter : 2nd marriage", code: "H99999" }
+              ]
+            },
+            { id: "H950", label: "Willie Dubh (died in England)", code: "H99999" },
+            { id: "H1000", label: "Another born in England", code: "H99999" }
+          ]
+        },
+
+        {
+          id: "H1050",
+          label: "Coleman June 8, 1890 in Lettercallow (lived in Palmyra Avenue, Galway) : married Anna, Pat Folan's sister : second wife was from Craughwell, Co. Galway",
+          code: "H00080",
+          children: [
+            { id: "H1100", label: "John Patrick (Paddy)", code: "H99999" },
+            { id: "H1150", label: "Colmán (Dublin)", code: "H99999" },
+            { id: "H1200", label: "Bertie (Crawley, UK) : deceased", code: "H99999" },
+            { id: "H1250", label: "Willie Rua", code: "H99999" },
+            {
+              id: "H1300",
+              label: "Nancy Wilson (Dublin)",
+              code: "H99999",
+              children: [
+                { id: "H1350", label: "Georgie Wilson : was on the Dublin team that beat Galway in the 1974 All-Ireland football final", code: "H99999" }
+              ]
+            },
+            { id: "H1400", label: "Gerard - England. Member of 2nd family)", code: "H99999" },
+            { id: "H1450", label: "Mary - England. Member of 2nd family", code: "H99999" },
+            { id: "H1500", label: "Michael - Wicklow. Member of 2nd family", code: "H99999" },
+            { id: "H1550", label: "Rita O'Connell - Menlo. Member of 2nd family", code: "H99999" }
+          ]
+        },
+
+        {
+          id: "H1600",
+          label: "Sean (Jack) born c.1893 :worked as a driver for Guinness in Dublin",
+          children: [
+            { id: "H1650", label: "Helena", code: "H99999" },
+            { id: "H1700", label: "Margeurita", code: "H99999" },
+            { id: "H1750", label: "Violet", code: "H99999" },
+            { id: "H1800", label: "Sean (killed in motorcycle accident aged 20)", code: "H99999" }
+          ]
+        },
+
+        { id: "H1850", label: "Patrick c.1895-c.1906 : died aged 11", code: "H00030" },
+
+        {
+          id: "H1900",
+          label: "Bridget Jun 24, 1897-c.1996 (Slate, Lettermore) : married deLappe",
+          code: "H00120",
+          children: [
+            { id: "H1950", label: "Marie - deceased c.2010(Pittsburgh)", code: "H99999" },
+            { id: "H2000", label: "Catherine (Carlow)", code: "H99999" },
+            { id: "H2050", label: "Bridget (Pittsburgh)", code: "H99999" },
+            { id: "H2150", label: "Paddy (Santa Barbara, CA)", code: "H99999" },
+            { id: "H2100", label: "Margaret (Baby) : deceased c.2004 (Lettermore)", code: "H99999" },
+            { id: "H2200", label: "Sean died aged 3", code: "H99999" }
+          ]
+        },
+
+        {
+          id: "H2250",
+          label: "Mary Higgins Folan Jan 22, 1901 - Jun 4, 1945 (Lettercallow/Rathcarn Co. Meath) : married Pat 'Tailliúr' Folan (February 28, 1894 - Nov 7, 1968) from Lettermore on Spetember 4, 1916 in Rosmuck",
+          code: "H00100",
+          children: [
+            {
+              id: "H2300",
+              label: "Paudeen Dec 20, 1917?-? (London)",
+              code: "H99999",
+              children: [
+                { id: "H2350", label: "Kathleen", code: "H99999" },
+                { id: "H2400", label: "Michael", code: "H99999" },
+                { id: "H2450", label: "John", code: "H99999" },
+                { id: "H2500", label: "Patrick", code: "H99999" },
+                { id: "H2550", label: "Girl - deceased", code: "H99999" }
+              ]
+            },
+            {
+              id: "H2600",
+              label: "Mary May 19, 1919-? (Boston) : married to Coleen Mulkerrins",
+              code: "H99999",
+              children: [
+                { id: "H2650", label: "Josaphine deceased(London)", code: "H99999" },
+                { id: "H2700", label: "Michael deceased (Boston)", code: "H99999" },
+                { id: "H2750", label: "Coleen (London)", code: "H99999" },
+                { id: "H2800", label: "Kevin (London)", code: "H99999" },
+                { id: "H2850", label: "Patsy (Boston)", code: "H99999" },
+                { id: "H2900", label: "John (Boston)", code: "H99999" },
+                { id: "H2950", label: "Teresa (Boston)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H3000",
+              label: "Nan Aug 18 1920 - Aug 16 2004 (Cashel, Connemara) : Married to Paddy Connolly",
+              code: "H99999",
+              children: [
+                {
+                  id: "H3050",
+                  label: "Paddy Sep 21, 1942- (Florida) : Married to Barbara",
+                  code: "H99999",
+                  children: [
+                    { id: "H3100", label: "Patrick Sep 10, 1967-Oct 19, 2005 (Los Angeles)", code: "H99999" },
+                    {
+                      id: "H3150",
+                      label: "Keith Mar 21, 1973- (Long Island NY)",
+                      code: "H99999",
+                      children: [
+                        { id: "H3200", label: "Lacey", code: "H99999" }
+                      ]
+                    },
+                    {
+                      id: "H3250",
+                      label: "Courtney Mar 21, 1977- (Los Angeles) : married to Jason",
+                      code: "H99999",
+                      children: [
+                        { id: "H3300", label: "Hunter", code: "H99999" }
+                      ]
+                    },
+                    { id: "H3350", label: "Reid Oct 29, 1989- (Austin Texas)", code: "H99999" }
+                  ]
+                },
+                {
+                  id: "H3400",
+                  label: "Jimmy Mar 21, 1946- (London) : married to Anne Mahony (died on Aug 15, 2007)",
+                  code: "H99999",
+                  children: [
+                    {
+                      id: "H3450",
+                      label: "Susan Oct 25, 1969- (London) : married to Nick Heather",
+                      code: "H99999",
+                      children: [
+                        { id: "H3500", label: "Stephen", code: "H99999" },
+                        { id: "H3550", label: "Amy", code: "H99999" }
+                      ]
+                    },
+                    {
+                      id: "H3600",
+                      label: "Karen Oct 20, 1975- (Leeds) : married to David",
+                      code: "H99999",
+                      children: [
+                        { id: "H3650", label: "Harry", code: "H99999" },
+                        { id: "H3700", label: "Stanley", code: "H99999" }
+                      ]
+                    },
+                    { id: "H3750", label: "Brian Jan 22, 1980- ", code: "H99999" }
+                  ]
+                },
+                {
+                  id: "H3800",
+                  label: "Sean May 11, 1955- (Oranmore) : married to Mairead Hughes",
+                  code: "H99999",
+                  children: [
+                    {
+                      id: "H3850",
+                      label: "Eavan Aug 12, 1979-(Wicklow : married to Andy Hayes)",
+                      code: "H99999",
+                      children: [
+                        { id: "H3900", label: "Ruby Jul 17, 2014- ", code: "H99999" }
+                      ]
+                    },
+                    {
+                      id: "H3950",
+                      label: "Emmet Feb 14, 1981- (Dublin) : married to Paula Henihan",
+                      code: "H99999",
+                      children: [
+                        { id: "H4000", label: "Finn Jan 31, 2014- ", code: "H99999" }
+                      ]
+                    },
+                    { id: "H4050", label: "Denise Sep 29, 1983- (Maynooth) : married to Darrell Flinn", code: "H99999" },
+                    { id: "H4100", label: "Lisa May 29, 1990- (Dunshaughlin, Co. Meath)", code: "H99999" }
+                  ]
+                },
+                { id: "H4150", label: "Michael Sep 20, 1959- (New Jersey) : married to Isabel", code: "H99999" },
+                { id: "H4200", label: "Anne Sep 11, 1961- (New York)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H4250",
+              label: "Sean Oct 17, 1922-Aug 15, 2013 (Boston) : married to Monica McDonagh from Cashel, Connemara",
+              code: "H99999",
+              children: [
+                { id: "H4300", label: "Marie Oct 2, 1953-Mar 3, 2003 (Boston)", code: "H99999" },
+                {
+                  id: "H4350",
+                  label: "Phil Jul 20, 1955- (San Francisco) : married to ? Hicks",
+                  code: "H99999",
+                  children: [
+                    { id: "H4400", label: "Molly Mar 29, 1993-", code: "H99999" },
+                    { id: "H4450", label: "Sean May 2, 1995- ", code: "H99999" }
+                  ]
+                },
+                { id: "H4500", label: "Una Jul 29, 1956- (New Hampshire) : married to Mike Aiken", code: "H99999" },
+                {
+                  id: "H4550",
+                  label: "John Feb 3, 1960- (Boston) : Married to Maryann Folan",
+                  code: "H99999",
+                  children: [
+                    { id: "H4600", label: "Aine Jun 24, 1998- ", code: "H99999" },
+                    { id: "H4650", label: "Sean (or Martin??) Oct 6, 2000- ", code: "H99999" }
+                  ]
+                },
+                {
+                  id: "H4700",
+                  label: "Carmel May 8, 1963- (Boston) : Married to Kevin O'Leary",
+                  code: "H99999",
+                  children: [
+                    { id: "H4750", label: "Adrienne Mar 10, 1991- ", code: "H99999" },
+                    { id: "H4800", label: "Brian Feb 28, 1993- ", code: "H99999" },
+                    { id: "H4850", label: "Claire Sep 30, 1996- ", code: "H99999" }
+                  ]
+                }
+              ]
+            },
+            {
+              id: "H4900",
+              label: "Bridie Jun 14, 1924- (Carraroe) : married to Tommy McDonagh (killed in motorcycle accident in 1958)",
+              code: "H99999",
+              children: [
+                { id: "H4950", label: "Mary (Camus)", code: "H99999" },
+                { id: "H5000", label: "Petey (Camus)", code: "H99999" },
+                { id: "H5050", label: "Margaret/Mags (Maam)", code: "H99999" },
+                { id: "H5100", label: "Annie (Carraroe)", code: "H99999" },
+                { id: "H5150", label: "Brid (Carraroe)", code: "H99999" },
+                { id: "H5200", label: "Tommy (Carraroe)", code: "H99999" },
+                { id: "H5250", label: "Partick (Carraroe)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H5300",
+              label: "Nora MdDonagh Nov 13, 1925-? (Rathcarn, Co. Meath)",
+              code: "H99999",
+              children: [
+                { id: "H5350", label: "Micheal (Rathcarn)", code: "H99999" },
+                { id: "H5400", label: "Maureen Flood (Navan)", code: "H99999" },
+                { id: "H5450", label: "Colm (Trim)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H5500",
+              label: "Winnie Mar 7, 1927-? (London) : Married to Paddy Callinan",
+              code: "H99999",
+              children: [
+                { id: "H5550", label: "Gerald Oct 4, 1958- (London)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H5600",
+              label: "Barbara Apr 20, 1929-? (London) : married to Jimmy Glennon",
+              code: "H99999",
+              children: [
+                { id: "H5650", label: "Jimmy (London)", code: "H99999" },
+                { id: "H5700", label: "John (London)", code: "H99999" },
+                { id: "H5750", label: "Patsy (London)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H5800",
+              label: "Coleen May 28, 1930- (San Francisco) : married to Jude Grealish",
+              code: "H99999",
+              children: [
+                { id: "H5850", label: "Teresa (Boston)", code: "H99999" },
+                { id: "H5900", label: "Daughter (Boston)", code: "H99999" },
+                { id: "H5950", label: "Son (San Francisco)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H6000",
+              label: "Bartley Mar 8, 1933- (Rathcarn, Co. Meath) : married to Maureen",
+              code: "H99999",
+              children: [
+                { id: "H6050", label: "Bartley (London)", code: "H99999" },
+                { id: "H6100", label: "Marian (London)", code: "H99999" },
+                { id: "H6150", label: "John (Boston)", code: "H99999" }
+              ]
+            },
+            { id: "H6200", label: "Marcus Aug 12, 1934-? (Boston)", code: "H99999" },
+            {
+              id: "H6250",
+              label: "Philomena Apr 28, 1937- (London) : married to Gerry Daly",
+              code: "H99999",
+              children: [
+                { id: "H6300", label: "Jerimiah (London)", code: "H99999" },
+                { id: "H6350", label: "Son (London)", code: "H99999" },
+                { id: "H6400", label: "Daughter (London)", code: "H99999" },
+                { id: "H6450", label: "Daughter (London)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H6500",
+              label: "Monica Sep 16, 1939- (Killorglin, Co. Kerry) : married to Don Moroney",
+              code: "H99999",
+              children: [
+                { id: "H6550", label: "Lisa Ann (Trim)", code: "H99999" },
+                { id: "H6600", label: "Stephen (Wicklow)", code: "H99999" }
+              ]
+            },
+            {
+              id: "H6650",
+              label: "Agnes  Jul 13, 1942(London)",
+              code: "H99999",
+              children: [
+                { id: "H6700", label: "Dawn - deceased (London)", code: "H99999" },
+                { id: "H6750", label: "Mark & Twin (London)", code: "H99999" }
+              ]
+            }
+          ]
+        },
+
+        {
+          id: "H6800",
+          label: "Willie Jun 24, 1903-c.197?",
+          code: "H00040",
+          children: [
+            {
+              id: "H6850",
+              label: "Mary c.1935-Nov 5, 2014 (Oughterard) : married to Connolly from Oughterard",
+              code: "H99999",
+              children: [
+                { id: "H6855", label: "Marie (USA)", code: "H99999" },
+                { id: "H6060", label: "Billy (USA)", code: "H99999" },
+                { id: "H6065", label: "Joe (London)", code: "H99999" },
+                { id: "H66070", label: "Tommy (Oughterard)", code: "H99999" },
+                { id: "H66075", label: "Nora Ann (Moycullen)", code: "H99999" },
+                { id: "H6080", label: "James (Australia)", code: "H99999" }
+              ]
+            },
+            { id: "H6900", label: "Liam (Wales)", code: "H99999" },
+            { id: "H6950", label: "Sean - deceased(England)", code: "H99999" },
+            { id: "H7000", label: "Cole (Northampton)", code: "H99999" },
+            { id: "H7050", label: "Ann (London)", code: "H99999" },
+            { id: "H7100", label: "Padraic (Lettercallow)", code: "H99999" },
+            { id: "H7150", label: "Seamus - died aged 50 (England)", code: "H99999" },
+            { id: "H7200", label: "Peggy (Leitrim)", code: "H99999" }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+/***** RENDERER: builds <ul>/<li> from JSON, preserving ids and onclick(readXML) *****/
+function buildLiFromNode(node) {
+  const li = document.createElement("li");
+  li.id = node.id;
+
+  if (node.opened === true) {
+    li.setAttribute("data-jstree", JSON.stringify({ opened: true }));
+  }
+
+  if (node.code) {
+    const span = document.createElement("span");
+    span.className = "clickable";
+    span.setAttribute("onclick", `return readXML('${node.code}')`);
+    span.textContent = node.label;
+    li.appendChild(span);
+  } else {
+    li.appendChild(document.createTextNode(node.label));
+  }
+
+  if (Array.isArray(node.children) && node.children.length) {
+    const ul = document.createElement("ul");
+    node.children.forEach(child => ul.appendChild(buildLiFromNode(child)));
+    li.appendChild(ul);
+  }
+  return li;
+}
+
+function renderFamilyTreeJSON(rootData, targetUlId = "org") {
+  const ul = document.getElementById(targetUlId);
+  if (!ul) return;
+  ul.innerHTML = "";
+  ul.appendChild(buildLiFromNode(rootData));
+}
+
+/***** UI helpers kept compatible with your existing flow *****/
+function processXMLData(htmlString) {
+  // Simple sanitizer for this context: treat as HTML snippet from trusted XML.
+  const inner = document.getElementById("inner");
+  inner.innerHTML = htmlString && htmlString.trim().length ? htmlString : "No information on this individual.";
+  // Show panel
+  const outer = document.getElementById("outer");
+  if (outer.style.display === "none") outer.style.display = "block";
+  return false;
+}
+
+function closeDiv() {
+  document.getElementById("outer").style.display = "none";
+  return false;
+}
+
+// Drop-in compatibility shim for legacy code that calls `loadXML(...)`.
+window.loadXML = function (arg1, arg2) {
+  // If it's a person code (e.g., "H00090"), delegate to readXML(code).
+  if (typeof arg1 === 'string' && !/\.xml$/i.test(arg1)) {
+    return readXML(arg1);
+  }
+
+  // Otherwise treat it as (url, onSuccess?)
+  var url = arg1 || "xml/personalInfo1.xml";
+  var onSuccess = (typeof arg2 === 'function') ? arg2 : function(){};
+
+  $.ajax({
+    type: "GET",
+    url: url,
+    dataType: "xml",
+    success: onSuccess,
+    error: function (xhr, status, err) {
+      processXMLData(
+        "<p><strong>Note:</strong> Could not load <code>" + url +
+        "</code> (" + status + ").</p>"
+      );
+    }
+  });
+  return false;
+};
+
+/***** readXML(code): mirrors your original intent (pulls from xml/personalInfo1.xml and finds <code>...</code>) *****/
+function readXML(code) {
+  $.ajax({
+    type: "GET",
+    url: "xml/personalInfo1.xml",
+    dataType: "xml",
+    success: function(xml){
+      var myData = $(xml).find(code).text();
+      if (!myData || myData.length === 0) {
+        myData = "No information on this individual.";
+      }
+      processXMLData(myData);
+    },
+    error: function (xhr, status, thrownError) {
+      processXMLData(
+        "<p><strong>Note:</strong> Could not load <code>xml/personalInfo1.xml</code> (" +
+        status + "). Ensure the XML file is available. You clicked code: <code>" + code + "</code>.</p>"
+      );
+    }
+  });
+  return false;
+}
+
+/***** Render and then initialise jsTree exactly as you had it *****/
+document.addEventListener("DOMContentLoaded", function () {
+  // 1) Build the UL/LI structure from JSON
+  renderFamilyTreeJSON(familyTreeData, "org");
+
+  // 2) Size the floating panel (same logic)
+  $("#outer").height($(window).height()/1.25);
+  $("#inner").height($("#outer").height() - 30);   // 30 less than outer
+  $("#outer").width($(window).width()/3);
+  $("#inner").width($("#outer").width() - 10);     // 10 less than outer
+
+  // 3) Initialise jsTree on #data (as in your original)
+  $('#data').jstree({ "plugins" : ["state"] });
+
+  // 4) Keep your node-select handler (uses element id from tree)
+  $('#data').on("select_node.jstree", function (e, data) {
+    $.ajax({
+      type: "GET",
+      url: "xml/personalInfo1.xml",
+      dataType: "xml",
+      success: function(xml){
+        var myData = $(xml).find(data.node.id).text();
+        if (!myData || myData.length === 0) {
+          myData = "No information on this individual";
+        }
+        processXMLData(myData);
+      },
+      error: function (xhr, status, thrownError) {
+        processXMLData(
+          "<p><strong>Note:</strong> Could not load <code>xml/personalInfo1.xml</code> (" +
+          status + "). You selected node id: <code>" + data.node.id + "</code>.</p>"
+        );
+      }
+    });
+  });
+});
+  </script>
+</body>
+</html>
