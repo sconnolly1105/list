@@ -1,0 +1,81 @@
+/*    <style type="text/css">  */
+		body
+		{
+		background-color:#FFFFCC;
+		}
+        .container
+		{
+            font-family: Arial, Helvetica, sans-serif;
+            width: 60%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #CCFF99;
+			padding:0px;
+;
+        }
+		.maparea
+		{
+            font-family: Arial, Helvetica, sans-serif;
+			font-size: 12px;
+			font-style: italic;
+			}
+        #table1
+		{
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 15px;
+            border-spacing: 1px;
+			border: 0px;
+		}
+		td
+		{
+			border: 1px;
+            padding: 15px;
+            border-spacing: 0px
+/*			border-style: outset;		*/
+		}
+		}
+		.col1
+		{
+			width:20%;
+            padding: 15px;
+            border-spacing: 0px
+		}
+		.col2
+		{
+/*			width:20%;		*/
+            padding: 2px;
+			padding-left:15px;
+            border-spacing: 0px
+		}
+		.toprows
+		{
+            padding: 2px;
+            border-spacing: 0px
+		}
+		.headers
+		{
+		text-align:center;
+		font-size:26px;
+		font-weight:bold;
+		}
+		img
+		{
+		width:201px;
+		height:251px;
+		border:2px;
+		border-style:outset;
+		}
+		#desc
+		{
+		width:80%;
+		margin-right:auto;
+		margin-left:auto;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 16px;
+		font-style: italic;
+		line-height:40px;
+		}
+/*    </style>  */

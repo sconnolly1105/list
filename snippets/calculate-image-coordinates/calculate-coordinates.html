@@ -1,0 +1,41 @@
+<html>
+
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <div id="image">
+    <img src="ireland.jpg">
+  </div>
+  <br>
+  <br>
+  coordinates :<br>
+  <div id="coordinates">0</div>
+  <be><br>
+  <h2>Mouseover the map to find the coordinates</h2>
+
+</body>
+
+</html>
+
+<script>
+$(document).ready(function(){
+      $('#image img').mousemove(function(e){
+      $('#coordinates').html('x: ' + e.pageX + ' y : ' + e.pageY);
+    });
+})
+</script>
+
+<style>
+.wrapper {
+  width: 20%;
+  margin: 100px auto 0 auto;
+}
+html, body {
+  margin: 0;
+}
+</style>

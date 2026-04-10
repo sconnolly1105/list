@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>Using eleemt.dataset fo find all the data fields</h3>
+    <h6>Check the console</h6>
+    
+    <div class="container" data-fname="Sean" data-surname="Connolly" data-age="66">
+
+    </div>
+
+    <script>
+        const el = document.querySelector ('.container');
+        console.log (el.dataset.fname, el.dataset.surname, el.dataset.age);
+    </script>
+</body>
+</html>
