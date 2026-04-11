@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Information</title>
+  <style>
+    /* Basic styling for the table */
+    table, h1 {
+      width: 40%;
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    h1 {
+        text-align: center
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    td:nth-child(2) {
+      width: 15%;
+    }
+    td:nth-child(3) {
+      width: 15%;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Employee Information</h1>
+
+  <!-- The table where the data will be injected -->
+  <table id="employee-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th style="text-align: right;">Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Handlebars will inject rows here -->
+    </tbody>
+  </table>
+
+  <!-- Handlebars template for rendering rows -->
+  <script id="employee-template" type="text/x-handlebars-template">
+    {{#each employees}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{dob}}</td>
+        <td>{{salary}}</td>
+      </tr>
+    {{/each}}
+  </script>
+
+  <!-- Handlebars JS and our custom script -->
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+  <script>
+    // JavaScript to compile the Handlebars template and render data
+
+    // Step 1: Define an array of employee objects
+    var data = {
+      employees: [
+        { name: "John Doe", dob: "1980-01-15", salary: "$50,000" },
+        { name: "Jane Smith", dob: "1990-05-22", salary: "$60,000" },
+        { name: "Mark Johnson", dob: "1985-07-12", salary: "$55,000" },
+        { name: "Lucy Brown", dob: "1992-10-30", salary: "$65,000" }
+      ]
+    };
+
+    // Step 2: Compile the Handlebars template
+    var templateSource = document.getElementById("employee-template").innerHTML;
+    var template = Handlebars.compile(templateSource);
+    console.log (`template: ${template}`);
+
+    // Step 3: Inject the compiled HTML into the table
+    var tableBody = document.querySelector("#employee-table tbody");
+    var html = template(data);  // Render the data into HTML using the template
+    console.log (`html: ${html}`);
+    tableBody.innerHTML = html; // Insert the rendered HTML into the DOM
+  </script>
+</body>
+</html>
