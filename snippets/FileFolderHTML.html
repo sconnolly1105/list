@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folder Simulation</title>
+  <style>
+    .file-explorer {
+      list-style-type: none;
+    }
+
+    .folder {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .files {
+      display: none;
+      list-style-type: none;
+      padding-left: 20px;
+    }
+    .file-explorer {
+        width: 40%;
+        margin: 1% auto;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="width: 40%; margin: 1% auto">Open/Closing File Explorer</h1>
+  <ul class="file-explorer">
+    <li>
+      <span class="folder" onclick="toggleFolder(this)">📁 Folder 1</span>
+      <ul class="files">
+        <li>File 1.1</li>
+        <li>File 1.2</li>
+      </ul>
+    </li>
+    <li>
+      <span class="folder" onclick="toggleFolder(this)">📁 Folder 2</span>
+      <ul class="files">
+        <li>File 2.1</li>
+        <li>File 2.2</li>
+      </ul>
+    </li>
+    <li>
+        <span class="folder" onclick="toggleFolder(this)">📁 Folder 3 (with subfolders)</span>
+        <ul class="files">
+            <li>
+                    <span class="folder" onclick="toggleFolder(this)">📁 SubFolder 1</span>
+                    <ul class="files">
+                    <li>File 3.1</li>
+                    <li>File 3.2</li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="folder" onclick="toggleFolder(this)">📁 SubFolder 2</span>
+                    <ul class="files">
+                    <li>File 3.1.1</li>
+                    <li>File 3.1.2</li>
+                    </ul>
+                </li>
+        </ul>
+      </li>
+    </ul>
+
+  <script>
+    function toggleFolder(element) {
+      var files = element.nextElementSibling;
+      if (files.style.display === "none" || files.style.display === "") {
+        files.style.display = "block";
+        element.textContent = "📂 " + element.textContent.slice(2);
+      } else {
+        files.style.display = "none";
+        element.textContent = "📁 " + element.textContent.slice(2);
+      }
+    }
+  </script>
+</body>
+</html>
