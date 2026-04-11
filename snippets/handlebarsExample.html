@@ -40,14 +40,7 @@
 
   <!-- The table where the data will be injected -->
   <table id="employee-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Date of Birth</th>
-        <th>Occupation</th>
-        <th style="text-align: right;">Salary</th>
-      </tr>
-    </thead>
+    <thead id="employee-header"></thead>
     <tbody>
       <!-- Handlebars will inject rows here -->
     </tbody>
@@ -65,6 +58,14 @@
     {{/each}}
   </script>
 
+  <script id="header-template" type="text/x-handlebars-template">
+  <tr>
+    {{#each headers}}
+      <th {{#if rightAlign}} style="text-align: right;"{{/if}}>{{label}}</th>
+    {{/each}}
+  </tr>
+</script>
+  
   <!-- Handlebars JS and our custom script -->
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
   <script>
@@ -80,6 +81,20 @@
       ]
     };
 
+    // Header definitions — add/remove columns here
+    var headerData = {
+        headers: [
+          { label: "Name" },
+          { label: "Date of Birth" },
+          { label: "Occupation" },
+          { label: "Salary", rightAlign: true }
+        ]
+  };
+
+// Compile and render the header template
+var headerSource = document.getElementById("header-template").innerHTML;
+var headerTemplate = Handlebars.compile(headerSource);
+document.getElementById("employee-header").innerHTML = headerTemplate(headerData);
     // Step 2: Compile the Handlebars template
     var templateSource = document.getElementById("employee-template").innerHTML;
     var template = Handlebars.compile(templateSource);
