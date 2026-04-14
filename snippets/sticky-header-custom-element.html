@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Basic styling for the custom sticky header */
+        .container {
+            width: 60%;
+            margin: 80px auto;
+        }
+        sticky-header {
+            display: block;
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            position: relative;
+            z-index: 100;
+            transition: 0.3s ease-in-out;
+        }
+
+        /* Styling for the navigation menu within the custom element */
+        sticky-header nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        sticky-header nav li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        sticky-header nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Sticky class for the custom element */
+        sticky-header.sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        /* Add a class to remove the sticky effect */
+        sticky-header.unsticky {
+            position: relative;
+            top: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include your custom sticky-header element -->
+    <sticky-header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </sticky-header>
+
+    <main>
+        <div class="container">
+            <h1 width="100%" style="text-align: center">Sticky Header</h1>
+            <h4>The header will stick once the user has scrolled down more than 200 pixels</h4>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam quasi nemo, maxime corporis possimus repellendus dolore laboriosam, vero repellat sunt, assumenda laudantium quod reiciendis modi earum est doloribus quibusdam blanditiis.
+                Fugiat dolore vel eos repellendus saepe reiciendis quod laboriosam temporibus? Ipsum, laborum repellendus. Quia modi ab dicta quod laudantium dolorum voluptatem. Iusto nam assumenda, facilis quis nulla inventore ex itaque!
+                Dignissimos cumque corrupti, expedita doloribus soluta, aperiam tempore quam omnis porro quaerat earum exercitationem odit, placeat voluptatum? Officiis, qui voluptatem. Veritatis reiciendis animi tenetur nihil earum nesciunt delectus incidunt soluta?
+                Repellat nostrum commodi minus, quos debitis pariatur laudantium exercitationem excepturi, provident reiciendis, omnis numquam accusamus velit ullam neque soluta! Amet possimus, quis dignissimos libero hic commodi iusto dolorem architecto maiores!
+                Soluta inventore architecto cum est accusantium laborum, aut reprehenderit voluptatum accusamus facilis, enim a pariatur odit non excepturi laboriosam optio, eaque consectetur! Exercitationem sunt cum provident dolorum aperiam commodi architecto.
+            </p>
+        </div>
+
+    </main>
+
+    <script>
+        // Create a custom element class for <sticky-header>
+        class StickyHeader extends HTMLElement {
+            constructor() {
+                super();
+                this.attachShadow({ mode: 'open' });
+                this.shadowRoot.innerHTML = `
+                    <style>
+                        /* Additional styles specific to the shadow DOM */
+                        :host {
+                            display: block;
+                        }
+                    </style>
+                    <slot></slot>
+                `;
+            }
+
+            connectedCallback() {
+                // Add scroll event listener to toggle sticky class
+                window.addEventListener("scroll", () => {
+                    if (window.scrollY > 100) {
+                        this.classList.add("sticky");
+                    } else {
+                        this.classList.remove("sticky");
+                    }
+                });
+            }
+        }
+
+        // Define the custom element
+        customElements.define('sticky-header', StickyHeader);
+    </script>
+</body>
+</html>

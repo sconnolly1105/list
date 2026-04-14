@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic tooltip using css ::before and ::after pseudo selectors</title>
+</head>
+<body>
+    <div class="container">
+        <h2>
+            Note that the ::before & ::after do not work on self closing elements
+            such as <code>input or img</code>
+        </h2>
+        <p>Hover over the button to see the tooltip</p>
+        <div class="inputs">
+            <label class="required" for="name">Enter the name you want to use</label>
+            <input required id="name">
+            <button type="button" data-tooltip="Entering a name is mandatory because if you don't
+            then the input is invalid and will be rejected by the server.">Click me</button>
+        </div>
+    </div>
+</body>
+
+<style>
+    .container {
+        width: 40%;
+        margin: 40px auto;
+    }
+    .inputs * {
+        width: 100%;
+    }
+    label.required::before {
+        content: '*';
+    }
+    [data-tooltip] {
+        position: relative;
+    }
+    button {
+        margin-top: 20px;
+    }
+    [data-tooltip]:hover::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: 100%;
+        left: 50;
+        transform: translateX(-50%);
+        margin-top: 10px;
+        padding: 5px;
+        border: 1px solid lightgrey;
+        width: 40%;
+    }
+</style>
+
+<script>
+    console.log (`document.title: ${document.title}`);
+    document.title = 'New title';
+</script>
+</html>

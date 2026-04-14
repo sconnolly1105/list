@@ -1,0 +1,93 @@
+
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="S, Connolly" />
+<meta name="description" content="" />
+
+</head>
+
+<body>
+
+  <div class="table-class">
+    <table>
+      <tr>
+        <td class="some-image">
+          <img src="https://cdn.shopify.com/s/files/1/1375/9207/files/blond-woman-with-winter-pine.jpg?4123" alt="Test image" title="Test image" style="max-width:66%;">
+        </td>
+        <td class="some-text">
+          Some text here
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</body>
+
+<style>
+  table {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid;
+  }
+  td.some-image img {
+    width: 66%;
+//    min-height: 100%;
+//    min-width: 100%;
+    height: auto;
+}
+}
+td.some-text {
+  width: 33%;
+}
+</style>
+
+<script>
+
+  var nextDate = checkBeforeNoon ();
+  console.log ('nextDate: ' + nextDate);
+
+  function checkBeforeNoon () {
+
+     var estDate = calcTime('Australia', '-16');      // Australia is just here
+     console.log ('estDate: ' + estDate);
+     var d = new Date(estDate);
+     var hour = d.getHours();
+     console.log ('hour: ' + hour)
+     var nextDeliveryDate = '+0';
+     var utcDay = new Date().getUTCDate();      // get today's date in UTC
+     var localDay = d.getDate();
+     if (utcDay === localDay) {
+       if (hour > 13) {
+    	  nextDeliveryDate = '+1';
+        } else {
+      	  nextDeliveryDate = '+0';
+        };
+    } else if (utcDay > localDay) {
+      nextDeliveryDate = '+1';
+    }  else {
+      nextDeliveryDate = '+1';
+    }
+
+    console.log ('Local day: ' + localDay);
+    console.log ('UTC Day: ' + utcDay);
+    return nextDeliveryDate;
+
+    }
+
+   function calcTime(city, offset) {
+       d = new Date();
+       utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+       nd = new Date(utc + (3600000*offset));
+       return nd;
+  };
+</script>
+
+</html>

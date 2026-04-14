@@ -1,0 +1,112 @@
+<!doctype html>
+
+<html lang="en">
+
+
+<body>
+
+<div class="box box1">
+<strong>Box 1 :</strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>SCALE</strong>
+</div>
+
+<div class="box box2">
+  <strong>Box 2: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>ROTATE</strong>
+</div>
+
+<div class="box box3">
+  <strong>Box 3: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  <strong>SKEW</strong>
+</div>
+
+<div class="box box4">
+ <strong>Box 4: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>SKEW EVERY 3 SECONDS</strong>
+</div>
+
+<div class="box box5">
+  <strong>Box 5: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>COMPLETE ROTATE EVERY 3 SECONDS</strong>
+</div>
+
+<div class="box box6">
+  <strong>Box 6: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>TRANSLATE</strong>
+</div>
+
+<div class="box box7">
+  <strong>Box 7: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>TRANSLATE 3D</strong>
+</div>
+
+</body>
+
+</html>
+
+<style>
+  .box {
+    width: 10%;
+    margin: 50px auto 0 auto;
+    padding: 20px;
+    border: 1px solid black;
+    color: black;
+  }
+  .box1 {
+    background-color: yellow;
+    transform: scale(1.5);
+  }
+  .box2 {
+    background-color: pink;
+    transform: rotate(20deg);
+  }
+  .box3 {
+    background-color: purple;
+    transform: skew(-20deg);
+    color: white;
+  }
+  .box4 {
+    background-color: lightblue;
+    animation: skew1 3s infinite;
+    transform: skew(20deg);
+    animation-direction: alternate;
+  }
+  .box5 {
+    background-color: lightgoldenrodyellow;
+    animation: roll 3s infinite;
+    /* transform: rotate(20deg); */
+  }
+  .box6 {
+    background-color: honeydew;
+    animation: shimmy 3s infinite;
+  }
+  .box7 {
+    background-color: bisque;
+    animation: trans3d 3s infinite;
+  }
+  @keyframes skew1 {
+    0% {
+      transform: skewX(20deg);
+    }
+    100% {
+      transform: skewX(-20deg);
+    }
+  }
+  @keyframes roll {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes shimmy {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 100px);
+  }
+}
+@keyframes trans3d {
+0% {
+  transform: translate3d(0);
+}
+100% {
+  transform: perspective(200px) translate3d(150px, 40px, -100px);
+}
+}
+</style>

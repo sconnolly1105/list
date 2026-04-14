@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        button {
+            font-size: 25px;
+            border-radius: 5px;
+        }
+        #box, #box1 {
+            height: 100px;
+            width: 100px;
+            border: 2px solid black;
+            margin: 2rem 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<h4>Clicking on Button 1 below will increment the button text</h4>
+<h4>while clicking on Button 2 will increment both button 1 and 2</h4>
+<h4>so button 2 triggers the click of button 1</h4>
+
+<button id="btnOne">1</button>
+<button id="btnTwo">2</button>
+
+<h4>Clicking on the square below will change the background colour to Pink</h4>
+<h4>Clicking on the Trigger button will change the background colour to Limegreen</h4>
+<h4>The button click triggers the click on the box.</h4>
+<h4>The jQuery event.originalEvent is tested to select different colours</h4>
+
+<div id="box"></div>
+<button id="btnTrigger">Trigger</button>
+
+<h4>Does the same as the above boxes but using native JS instead of jQuiry</h4>
+
+<div id="box1"></div>
+<button id="btnTrigger1">Trigger 1</button>
+
+<script>
+$(document).ready(function () {
+    $('#btnOne').click(function () {
+        $(this).html($(this).html()*1 + 1);
+    });
+    $('#btnTwo').click(function () {
+        $(this).html($(this).html()*1 + 1);
+        $('#btnOne').trigger('click');
+    });
+    $('#box').click(function (event) {
+        alert (event.originalEvent);
+        if (event.originalEvent === undefined) {
+            $(this).css('background', 'limegreen');
+        } else {
+            $(this).css('background', 'pink');  
+        }
+        
+    });
+    $('#btnTrigger').click(function () {
+        $('#box').trigger('click');
+    });
+
+    const box1 = document.querySelector ('#box1');
+    const trigger1 = document.querySelector ('#btnTrigger1');
+
+    box1.addEventListener('click', function (e) {
+        console.log (e.target);
+        console.log (e.currentTarget);
+        if (e.isTrusted == true) {
+            this.style.backgroundColor = 'red';
+        } else {
+            this.style.backgroundColor = 'blue';
+        }
+    })
+
+    trigger1.addEventListener('click', function () {
+        box1.click();
+    })
+
+});
+</script>
+
+</body>
+</html>

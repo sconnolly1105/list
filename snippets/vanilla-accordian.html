@@ -1,0 +1,102 @@
+<html translate="no">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<div class="container">
+  <button id="btn-collapse">Collapse All</button>
+  <h2>FAQ</h2>
+  <section id="faq">
+    <div class="panel-question active">
+      <div class="panel-heading">
+        + Lorem ipsum dolor sit?
+      </div>
+      <div class="panel-body" id="thisone">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad aliquid voluptate fugit quaerat non molestiae quo magni soluta minima corporis! Soluta, ipsa et.</p>
+        <p>Quos quibusdam, nesciunt totam ullam quasi neque!</p>
+      </div>
+    </div>
+
+    <div class="panel-question">
+      <div class="panel-heading">
+        + Lorem ipsum dolor sit?
+      </div>
+      <div class="panel-body">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad aliquid voluptate fugit quaerat non molestiae quo magni soluta minima corporis! Soluta, ipsa et.</p>
+        <p>Quos quibusdam, nesciunt totam ullam quasi neque!</p>
+      </div>
+    </div>
+
+    <div class="panel-question">
+      <div class="panel-heading">
+        + Lorem ipsum dolor sit?
+      </div>
+      <div class="panel-body">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad aliquid voluptate fugit quaerat non molestiae quo magni soluta minima corporis! Soluta, ipsa et.</p>
+        <p>Quos quibusdam, nesciunt totam ullam quasi neque!</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+html, body {
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.panel-question {
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.panel-heading {
+  font-weight: bold;
+  padding: 5px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.panel-body {
+  padding: 15px;
+}
+
+#btn-collapse {
+  margin-bottom: 10px;
+  background-color: #999;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+  float: right;
+}
+</style>
+
+
+<script>
+var btnCollapse = $("#btn-collapse");
+var question = $(".panel-question");
+var heading = $(".panel-heading");
+var answer = $(".panel-body");
+
+function activateQuestion() {
+  answer.hide();
+  $(".panel-question.active .panel-body").show();
+}
+
+heading.on("click", function() {
+  question.removeClass("active");
+  $(this).parent().addClass("active");
+  activateQuestion();
+});
+
+activateQuestion();
+</script>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="image-container">
+        <img src="http://unsplash.it/1200/300" alt="" class="image-class">
+    </div>
+
+</body>
+</html>
+
+<style>
+    :root {
+        --borderColour: #ff0000;
+        --borderWidth: 80%;
+        --borderHeight: 10px;
+        --marginTopBottom: 1rem;
+        --imageWidth: 800px;
+    }
+    .image-container img {
+        width: var(--imageWidth);
+    }
+    .image-container {
+        width: var(--imageWidth);  
+        margin-top: 5rem;
+        margin-left: auto;
+        margin-right: auto
+    }
+    .image-container::before {
+        content: '';
+        width: var(--borderWidth);  
+        height: var(--borderHeight);   
+        background-color: var(--borderColour);
+        display: block;
+        margin-bottom: var(--marginTopBottom);
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .image-container::after {
+        content: '';
+        width: var(--borderWidth);  
+        height: var(--borderHeight);     
+        background: var(--borderColour);
+        display: block;
+        margin-top: var(--marginTopBottom);
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>

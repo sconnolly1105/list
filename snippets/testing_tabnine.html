@@ -1,0 +1,45 @@
+<html>
+    <body>
+        <div class="text" data-quantity="7" data-position="100,300" qty="500" width="600" height="400">
+            This is the text
+        </div>
+        <a href="http://shopify.com"></a>
+
+        <label for="age" style="margin-top: 2em; display: block;">Age</label>
+        <select class='age' id="age" style="display: block;">
+            <option value="67">67</option>
+            <option value="68">68</option>
+            <option value="42">42</option>
+            <option value="40">40</option>
+            <option value="38">38</option>
+            <option value="31">31</option>
+        </select>
+    </body>
+
+<script>
+const el = document.querySelector ('.text');
+const link = document.querySelector('a');
+const age = document.querySelector ('.age');
+console.log ('innerHTML: ' + el.innerHTML);
+console.log ('text: ' + el.textContent);
+console.log (`width: ${el.getAttribute('width')}`);
+console.log (`height: ${el.getAttribute('height')}`);
+console.log (`position: ${el.getAttribute('data-position')}`);
+console.log (`qty: ${el.getAttribute('qty')}`);
+console.log (`quantity: ${el.getAttribute('data-quantity')}`);
+el.classList.add('test2');
+console.log (`classes: ${el.classList}`);
+el.classList.remove('test2');
+console.log (`classes: ${el.classList}`);
+console.log (`attribute names: ${el.getAttributeNames()}`);
+
+console.log (`link: ${link.getAttribute('href')}`);
+console.log (`age: ${age.value}`);
+
+age.addEventListener('change', () => {
+    console.log (`age: ${age.value}`);
+});
+
+</script>
+
+</html>

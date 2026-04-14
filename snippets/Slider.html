@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Slider - Default functionality</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#select").text(0);
+            $("#slider").slider({
+                value: 0,
+                min: 0,
+                max: 100,
+                step: 5,
+                slide: function(event, ui) {
+                    $('#select').text(ui.value);
+                }
+            });
+            // $("#select").text($("#slider").slider("value"));
+        });
+    </script>
+
+    <style>
+        .value-wrapper {
+            margin-top: 20px;
+        }
+        
+        .wrapper {
+            width: 65%;
+            margin: auto;
+        }
+        
+        .ui-slider-handle {
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div id="slider"></div>
+        <div class="value-wrapper">Value: <span id="select"></span></div>
+    </div>
+
+</body>
+
+</html>

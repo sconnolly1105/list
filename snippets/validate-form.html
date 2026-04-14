@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Form Validation Phone Number</title>
+    <style>
+        [name='myForm'] * {
+            display: block;
+            margin-bottom: 5px  
+        }
+    </style>
+</head>
+<body>
+    <form name="myForm" action="data_handler.php">
+        <input type="tel" name="telephone" placeholder="Home phone">
+        <input type="tel" name="mobile" placeholder="Mobile">
+        <input type="button" value="Submit" onclick="validateAndSend()">
+    </form>
+<script>
+function validateAndSend() {
+    alert (`myForm.telephone.value: ${myForm.telephone.value}`);
+    alert (`myForm.mobile.value: ${myForm.mobile.value}`);
+    if (myForm.telephone.value == '' && myForm.mobile.value == '') {
+        alert('You have to enter at least one phone number.');
+        return false;
+    }
+    else {
+        return false;
+        myForm.submit();
+    }
+}
+</script>
+</body>
+</html>
